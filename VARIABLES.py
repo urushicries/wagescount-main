@@ -31,7 +31,8 @@ class infoVariables:
     # Text describing the function for daily wage calculation
     infoAboutShiftEverydayFunc = ("Calculates daily wages\n tracks worker location,\n and assigns shifts by day." )
 
-    infoAboutDeleteButton = ("Deletes all input info from table" )
+    infoAboutDeleteButton = ("Deletes all input info from table")
+
     #data variables for computations
     days_in_month = 15
     sheetKOM =  None
