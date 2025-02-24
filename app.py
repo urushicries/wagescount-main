@@ -1,9 +1,9 @@
 import tkinter as tk
 
+
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from googleapiclient.discovery import build
-
 
 
 from RES import ResChooser # Модуль выбора разрешения окна проги
@@ -23,13 +23,12 @@ selected_resolution = chooser.get_resolution()
 width, height = map(int, selected_resolution.split("x"))
 scaling_factor = UandBundOpt.checkWindowDPI()
 
-#window opt
+
 UandBundOpt.optForWindowSize()
 bundle_dir = UandBundOpt.optIfAppIsCompiled()
 
 root = tk.Tk()
-root.resizable(0,0)
-
+root.resizable(0, 0)
 root.title("Программа для расчет З/П Another World")
 
 screen_width = root.winfo_screenwidth()
