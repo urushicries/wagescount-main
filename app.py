@@ -4,32 +4,28 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from googleapiclient.discovery import build
 
-#interface settings
-from InterSettings import (
-    checkWindowDPI
-)
 
-#windows DPI scaling factor optimization and for compiled app
-from MInterAndWindow import (
-    optForWindowSize,
-    optIfAppIsCompiled
-)
-from res_chooser import ResChooser
-from parserModule import Parser
-from qol_functions import QOL
-from updateModule import Updater
-from variablesModule import infoVariables
-from ModuleUiFunctionality import UiManager
+
+from res_chooser import ResChooser # Модуль выбора разрешения окна проги
+from MInterAndWindow import UandBundOpt # Модуль оптимизации размера окна под масштаб(в винде под ноуты)
+from variablesModule import infoVariables #Модуль с информациооными переменными
+from ModuleUiFunctionality import UiManager # Модуль с настройкой UI и его функциональности
+from updateModule import Updater # модуль с методами обновления таблицы ЗП
+from parserModule import Parser # Модуль с методами с копированием информации с отчетов и компоновкой ее в удобоворимый формат для обновления.
+from qol_functions import QOL # Модуль с методами для упрощения жизни (quality of life)
+
+
+
 
 chooser = ResChooser()
 selected_resolution = chooser.get_resolution()
 
 width, height = map(int, selected_resolution.split("x"))
-scaling_factor = checkWindowDPI()
+scaling_factor = UandBundOpt.checkWindowDPI()
 
 #window opt
-optForWindowSize()
-bundle_dir = optIfAppIsCompiled()
+UandBundOpt.optForWindowSize()
+bundle_dir = UandBundOpt.optIfAppIsCompiled()
 
 root = tk.Tk()
 root.resizable(0,0)

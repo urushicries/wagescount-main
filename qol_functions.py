@@ -1,4 +1,4 @@
-import gspread
+
 class QOL:
     def replace_letter(letter: str) -> str:
         """Меняет английские А и О, С на русские"""
