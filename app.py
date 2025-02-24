@@ -15,13 +15,27 @@ from PARSmod import Parser # Модуль с методами с копиров�
 from QOLmodule import QOL # Модуль с методами для упрощения жизни (quality of life)
 
 
+days_in_month = infoVariables.days_in_month
+sheetKOM = infoVariables.sheetKOM
+shtKOM_id = infoVariables.shtKOM_id
+sheetPIK = infoVariables.sheetPIK
+shtPIK_id = infoVariables.shtPIK_id
+sheetJUNE = infoVariables.sheetJUNE
+shtJUN_id = infoVariables.shtJUN_id
+sheetLM = infoVariables.sheetLM
+shtLM_id = infoVariables.shtLM_id
+dataKOM = infoVariables.dataKOM
+dataPIK = infoVariables.dataPIK
+dataJUNE = infoVariables.dataJUNE
+dataLM = infoVariables.dataLM
+
 
 #вызываю выбор разрешения
 chooser = ResChooser()
 selected_resolution = chooser.get_resolution()
 
 width, height = map(int, selected_resolution.split("x"))
-scaling_factor = UandBundOpt.checkWindowDPI()
+scaling_factor, screen_height, screen_width = UandBundOpt.checkWindowDPI()
 
 
 UandBundOpt.optForWindowSize()
@@ -31,43 +45,26 @@ root = tk.Tk()
 root.resizable(0, 0)
 root.title("Программа для расчет З/П Another World")
 
-screen_width = root.winfo_screenwidth()
-screen_height = root.winfo_screenheight()
 
 
-# Базовое разрешение, относительно которого настраиваем масштаб
-base_width, base_height = screen_width, screen_height
-
-# Вычисляем коэффициент масштабирования
-scaling_factor = min(width / base_width, height / base_height)
-
-# Подгоняем итоговый коэффициент
-scale_factor = 1 / scaling_factor if scaling_factor > 1 else scaling_factor
-
-
-
-window_width = int(width * scale_factor)
-window_height = int(height * scale_factor)
-
-
-
-position_x = (screen_width - window_width) // 2
-position_y = (screen_height - window_height) // 2
+window_width, window_height, position_x, position_y , scale_factor = UandBundOpt.adjust_window_size(screen_width, screen_height, width, height)
 
 root.geometry(f"{window_width}x{window_height}+{position_x}+{position_y}")
 
 
 # Build the correct path to the JSON file
-
 json_path = "/Library/imp_files/key.json"
 
 SERVICE_ACCOUNT_FILE = json_path   
+
+try:
+    open(SERVICE_ACCOUNT_FILE,'r')
+except FileNotFoundError as e:
+    print(f"\033[31mFile path is wrong, dumbass - error code : {e}\033[0m")
+    exit(1)
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets", 
           "https://www.googleapis.com/auth/drive"]
 
-
-if SERVICE_ACCOUNT_FILE is None:
-    raise ValueError("The GOOGLE_APPLICATION_CREDENTIALS environment variable is not set or points to a non-existent file.")
 
 credentials = ServiceAccountCredentials.from_json_keyfile_name(SERVICE_ACCOUNT_FILE, SCOPES)
 
@@ -76,28 +73,6 @@ service = build('sheets', 'v4', credentials=credentials)
 
 sheetWAGES = client.open("! Таблица расчета зарплаты").worksheet("WGSlist")
 
-days_in_month = 15
-
-sheetKOM =  None
-shtKOM_id = "1vAVIeR4UWVAx7KwAR6x23yT_Ha1KTuc8VjcTVjnTM_8"
-
-sheetPIK = None
-shtPIK_id = "1DlRu9fzlzJj4Uor4FvXp9IEwi4FJfKq4bD7cN9GbtW0"
-
-sheetJUNE = None
-shtJUN_id = "17tnMhq5fp9IEatRqLnlyeemhbNP4aGOblGWpJ4_ABYs"
-
-sheetLM = None
-shtLM_id = "1PIICQiP3Tr1gmw4CsQ1bxVbkaU4mOPm_6409W-b7K3E"
-
-dataKOM = None
-
-dataPIK = None
-
-dataJUNE = None
-
-dataLM = None
 
 
-UiManager(root,client,QOL,Parser,Updater,infoVariables,service,sheetWAGES,shtKOM_id,shtPIK_id,shtJUN_id,shtLM_id,scale_factor)
-root.mainloop()
+UiManager(root,client, QOL, Parser, Updater, infoVariables, service, sheetWAGES, shtKOM_id, shtPIK_id, shtJUN_id, shtLM_id, scale_factor)

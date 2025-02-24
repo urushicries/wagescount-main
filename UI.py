@@ -30,6 +30,7 @@ class UiManager:
         
         # Setup the UI
         self.setup_ui()
+        self.run()
     
     def delete_ranges(self):
         self.QOL.clear_wgslist_ranges(self.service, "14FtsvGplg1jKXJvLJCueI8iEEnjJUtjk17NuPqeCnqo")
