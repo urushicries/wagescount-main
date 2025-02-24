@@ -58,12 +58,7 @@ screen_height = root.winfo_screenheight()
 position_x = (screen_width - window_width) // 2
 position_y = (screen_height - window_height) // 2
 
-
 root.geometry(f"{window_width}x{window_height}+{position_x}+{position_y}")
-
-
-
-print("программа запущена")
 
 
 # Build the correct path to the JSON file
