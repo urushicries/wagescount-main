@@ -1,8 +1,32 @@
-import gspread
 class QOL:
+    """
+    Класс QOL (Quality of Life) содержит вспомогательные методы для работы с текстом, 
+    обработкой данных сотрудников и управления Google Sheets через API.
+
+    Методы:
+        replace_letter(letter: str) -> str:
+            Заменяет английские буквы A, O, C на соответствующие русские аналоги.
+
+        is_valid_price(cell_value: str) -> bool:
+            Проверяет, соответствует ли строка формату цены с окончанием ",00".
+
+        makeDictEmpTot(emp_shift: list) -> dict:
+            Преобразует список смен сотрудников в словарь с их общим временем смен.
+
+        process_employees(worksheet: object) -> dict:
+            Обрабатывает данные сотрудников из строки 20 рабочего листа Google Sheets 
+            и создает словарь, где ключ — имя сотрудника, а значение — порядковый номер.
+
+        clear_wgslist_ranges(service: object, spreadsheet_id: str) -> None:
+            Очищает заданные диапазоны данных в таблице Google Sheets.
+
+        toggle_cell_value(sheet: object, days_in_month: int) -> None:
+            (Метод не реализован) Переключает значения ячеек в зависимости от количества дней в месяце.
+    """
+
     def replace_letter(letter: str) -> str:
-        """Меняет английские А и О на русские"""
-        return {"A": "А", "O": "О"}.get(letter, letter)
+        """Меняет английские А и О, С на русские"""
+        return {"A": "А", "O": "О","C": "О","С":"О"}.get(letter, letter)
 
     def is_valid_price(cell_value:str) -> bool:
         """Проверяет, соответствует ли строка формату цены с ,00 в конце."""
@@ -15,7 +39,7 @@ class QOL:
         """emp_shift list to dictionary"""
         employee_totals = {}
 
-        for employee, shift, j_ , i_,o_ in emp_shift:
+        for employee, shift, j_ , i_, o_ in emp_shift:
             if employee in employee_totals:
                 employee_totals[employee] += shift  
             else:
@@ -80,7 +104,7 @@ class QOL:
         except Exception as e:
             print(f"Ошибка при удалении данных: {e}")
 
-    def toggle_cell_value(sheet:object, days_in_month:int) -> None:
+    def toggle_cell_value(sheet: object, days_in_month: int) -> None:
         """
         Функция принимает объект листа и меняет значение ячейки E93 на листе WGSlist:
         если текущее значение равно "31", меняет на "15", иначе – на "31".

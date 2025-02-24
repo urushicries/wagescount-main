@@ -1,6 +1,6 @@
 import gspread
-from ffcwpModule import ffcwp15, ffcwpend
-from qol_functions import QOL
+from Model.FFCWP import ffcwp15, ffcwpend
+from Addons.QOLmodule import QOL
 
 
 class Parser:
@@ -16,7 +16,7 @@ class Parser:
 
     info_about_income:
         Извлекает данные из таблиц отчетов по общему доходу за каждую смену на каждой арене.
-
+        
     income_from_sheets:
         Находит ячейки, содержащие числовые (финансовые) значения в Google Sheets,
         и возвращает список кортежей (row_index, cell_value).

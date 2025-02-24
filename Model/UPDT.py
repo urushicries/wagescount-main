@@ -1,4 +1,5 @@
-from qol_functions import  QOL
+from Addons.QOLmodule import  QOL
+
 class Updater:
     """
     Класс для обновления данных в таблице заработной платы и торговых точек.
