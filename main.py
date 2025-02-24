@@ -6,11 +6,6 @@ from oauth2client.service_account import ServiceAccountCredentials
 from googleapiclient.discovery import build
 
 
-from Addons.RES import ResChooser # Модуль выбора разрешения окна проги
-from Addons.DIRandUI import UandBundOpt # Модуль оптимизации размера окна под масштаб(в винде под ноуты)
-from Addons.VARIABLES import infoVariables #Модуль с информациооными переменными
-from Addons.QOLmodule import QOL # Модуль с методами для упрощения жизни (quality of life)
-
 #Model
 from Model.UPDT import Updater # модуль с методами обновления таблицы ЗП
 from Model.PARSmod import Parser # Модуль с методами с копированием информации с отчетов и компоновкой ее в удобоворимый формат для обновления.
@@ -18,6 +13,12 @@ from Model.PARSmod import Parser # Модуль с методами с копи�
 from View.UI import UiManager # Модуль с настройкой UI и его функциональности
 #Presenter
 from Presenter.presenter import WebPresenter
+
+#addons
+from Addons.RES import ResChooser # Модуль выбора разрешения окна проги
+from Addons.DIRandUI import UandBundOpt # Модуль оптимизации размера окна под масштаб(в винде под ноуты)
+from Addons.VARIABLES import infoVariables #Модуль с информациооными переменными
+from Addons.QOLmodule import QOL # Модуль с методами для упрощения жизни (quality of life)
 
 if __name__ == "__main__":
     
