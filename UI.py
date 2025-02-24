@@ -2,6 +2,9 @@ import tkinter as tk
 from tkinter import BooleanVar
 
 class UiManager:
+    """
+    A class responsible for managing the graphical user interface (GUI) in the application.
+    """
     def __init__(self, root, client, QOL, Parser, Updater, infoVariables, service, sheetWAGES,
                  shtKOM_id, shtPIK_id, shtJUN_id, shtLM_id, scale_factor=1):
         self.root = root

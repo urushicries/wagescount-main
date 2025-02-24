@@ -1,5 +1,30 @@
 
 class QOL:
+    """
+    Класс QOL (Quality of Life) содержит вспомогательные методы для работы с текстом, 
+    обработкой данных сотрудников и управления Google Sheets через API.
+
+    Методы:
+        replace_letter(letter: str) -> str:
+            Заменяет английские буквы A, O, C на соответствующие русские аналоги.
+
+        is_valid_price(cell_value: str) -> bool:
+            Проверяет, соответствует ли строка формату цены с окончанием ",00".
+
+        makeDictEmpTot(emp_shift: list) -> dict:
+            Преобразует список смен сотрудников в словарь с их общим временем смен.
+
+        process_employees(worksheet: object) -> dict:
+            Обрабатывает данные сотрудников из строки 20 рабочего листа Google Sheets 
+            и создает словарь, где ключ — имя сотрудника, а значение — порядковый номер.
+
+        clear_wgslist_ranges(service: object, spreadsheet_id: str) -> None:
+            Очищает заданные диапазоны данных в таблице Google Sheets.
+
+        toggle_cell_value(sheet: object, days_in_month: int) -> None:
+            (Метод не реализован) Переключает значения ячеек в зависимости от количества дней в месяце.
+    """
+
     def replace_letter(letter: str) -> str:
         """Меняет английские А и О, С на русские"""
         return {"A": "А", "O": "О","C": "О","С":"О"}.get(letter, letter)
