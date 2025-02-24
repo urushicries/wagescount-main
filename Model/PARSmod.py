@@ -1,6 +1,6 @@
 import gspread
-from FFCWP import ffcwp15, ffcwpend
-from QOLmodule import QOL
+from Model.FFCWP import ffcwp15, ffcwpend
+from Addons.QOLmodule import QOL
 
 
 class Parser:

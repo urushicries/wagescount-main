@@ -43,6 +43,7 @@ class UandBundOpt:
         root.destroy()
         return scaling_factor, screen_height, screen_width
     
+    @staticmethod    
     def adjust_window_size(screen_width, screen_height, width, height):
         """
         Этот метод настраивает размер и позицию окна в зависимости от разрешения экрана и желаемых размеров.

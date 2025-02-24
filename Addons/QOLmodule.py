@@ -1,4 +1,3 @@
-
 class QOL:
     """
     Класс QOL (Quality of Life) содержит вспомогательные методы для работы с текстом, 
@@ -105,7 +104,7 @@ class QOL:
         except Exception as e:
             print(f"Ошибка при удалении данных: {e}")
 
-    def toggle_cell_value(sheet:object, days_in_month:int) -> None:
+    def toggle_cell_value(sheet: object, days_in_month: int) -> None:
         """
         Функция принимает объект листа и меняет значение ячейки E93 на листе WGSlist:
         если текущее значение равно "31", меняет на "15", иначе – на "31".

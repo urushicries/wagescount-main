@@ -34,7 +34,7 @@ class infoVariables:
     infoAboutDeleteButton = ("Deletes all input info from table")
 
     #data variables for computations
-    days_in_month = 15
+    days_in_month = 31
     sheetKOM =  None
     shtKOM_id = "1vAVIeR4UWVAx7KwAR6x23yT_Ha1KTuc8VjcTVjnTM_8"
 
