@@ -59,6 +59,7 @@ class UiManager:
     
     def toggle_RP_button(self, days_in_month):
         self.QOL.toggle_cell_value(self.sheetWAGES, days_in_month)
+        self.success()
     
     def on_button_click(self, month):
         months_data = {
@@ -268,7 +269,7 @@ class UiManager:
             bg="black", fg="lightgreen",
             font=("Arial", int(15 * self.scale_factor))
         )
-        self.label_success_info.grid(row=5, column=2)
+        self.label_success_info.grid(row=6, column=3)
     
     def run(self):
         self.root.mainloop()
