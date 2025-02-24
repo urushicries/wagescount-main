@@ -1,8 +1,8 @@
 import gspread
 class QOL:
     def replace_letter(letter: str) -> str:
-        """Меняет английские А и О на русские"""
-        return {"A": "А", "O": "О"}.get(letter, letter)
+        """Меняет английские А и О, С на русские"""
+        return {"A": "А", "O": "О","C": "О","С":"О"}.get(letter, letter)
 
     def is_valid_price(cell_value:str) -> bool:
         """Проверяет, соответствует ли строка формату цены с ,00 в конце."""
