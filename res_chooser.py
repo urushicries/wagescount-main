@@ -14,7 +14,7 @@ class ResChooser:
         screen_height = self.root.winfo_screenheight()
         position_x = (screen_width - 300) // 2
         position_y = (screen_height - 300) // 2
-        self.root.geometry(f"200x220+{position_x}+{position_y}")
+        self.root.geometry(f"240x220+{position_x}+{position_y}")
         
         self.root.grid_rowconfigure(0, weight=1)
         self.root.grid_rowconfigure(1, weight=1)

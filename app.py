@@ -36,8 +36,12 @@ root.resizable(0,0)
 
 root.title("Программа для расчет З/П Another World")
 
+screen_width = root.winfo_screenwidth()
+screen_height = root.winfo_screenheight()
+
+
 # Базовое разрешение, относительно которого настраиваем масштаб
-base_width, base_height = 1920,1080
+base_width, base_height = screen_width, screen_height
 
 # Вычисляем коэффициент масштабирования
 scaling_factor = min(width / base_width, height / base_height)
@@ -50,9 +54,6 @@ scale_factor = 1 / scaling_factor if scaling_factor > 1 else scaling_factor
 window_width = int(width * scale_factor)
 window_height = int(height * scale_factor)
 
-
-screen_width = root.winfo_screenwidth()
-screen_height = root.winfo_screenheight()
 
 
 position_x = (screen_width - window_width) // 2
