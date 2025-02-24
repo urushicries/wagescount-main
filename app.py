@@ -6,17 +6,17 @@ from googleapiclient.discovery import build
 
 
 
-from res_chooser import ResChooser # Модуль выбора разрешения окна проги
-from MInterAndWindow import UandBundOpt # Модуль оптимизации размера окна под масштаб(в винде под ноуты)
-from variablesModule import infoVariables #Модуль с информациооными переменными
-from ModuleUiFunctionality import UiManager # Модуль с настройкой UI и его функциональности
-from updateModule import Updater # модуль с методами обновления таблицы ЗП
-from parserModule import Parser # Модуль с методами с копированием информации с отчетов и компоновкой ее в удобоворимый формат для обновления.
-from qol_functions import QOL # Модуль с методами для упрощения жизни (quality of life)
+from RES import ResChooser # Модуль выбора разрешения окна проги
+from DIRandUI import UandBundOpt # Модуль оптимизации размера окна под масштаб(в винде под ноуты)
+from VARIABLES import infoVariables #Модуль с информациооными переменными
+from UI import UiManager # Модуль с настройкой UI и его функциональности
+from UPDT import Updater # модуль с методами обновления таблицы ЗП
+from PARSmod import Parser # Модуль с методами с копированием информации с отчетов и компоновкой ее в удобоворимый формат для обновления.
+from QOLmodule import QOL # Модуль с методами для упрощения жизни (quality of life)
 
 
 
-
+#вызываю выбор разрешения
 chooser = ResChooser()
 selected_resolution = chooser.get_resolution()
 

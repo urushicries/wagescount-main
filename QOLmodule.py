@@ -15,7 +15,7 @@ class QOL:
         """emp_shift list to dictionary"""
         employee_totals = {}
 
-        for employee, shift, j_ , i_,o_ in emp_shift:
+        for employee, shift, j_ , i_, o_ in emp_shift:
             if employee in employee_totals:
                 employee_totals[employee] += shift  
             else:
