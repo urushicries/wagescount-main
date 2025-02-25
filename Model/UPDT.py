@@ -1,4 +1,5 @@
-from Addons.QOLmodule import  QOL
+from Addons.QOLmodule import QOL
+
 
 class Updater:
     """
@@ -30,10 +31,9 @@ class Updater:
         """
         print("starting update_info_WAGES")
         _cntr = 97 + len(QOL.process_employees(sheetLink))
-        print("вот такой _cntr",_cntr)
+        print("вот такой _cntr", _cntr)
         rangeEMPNAMES = f'C97:D{_cntr}'  # Assuming these are employee names
 
-        
         # Get current data from the sheet
         cell_values = sheetLink.get(rangeEMPNAMES)
 
@@ -73,7 +73,6 @@ class Updater:
         """
         print("starting update_info_everyday")
 
-
         # Map employee names to column indices in the range
         employee_to_column = QOL.process_employees(sheetLink)
 
@@ -84,23 +83,29 @@ class Updater:
         # Prepare updates based on employee_shiftsList
         updates = []
         if days_in_month == 15:
-            for employee, value, day, dataset,tp_shft in employee_shiftsList:
+            for employee, value, day, dataset, tp_shft in employee_shiftsList:
                 if employee in employee_to_column:
                     column_offset = employee_to_column[employee]
-                    col_letter = chr(start_col15 + column_offset - 1)  # Convert column index to letter
+                    # Convert column index to letter
+                    col_letter = chr(start_col15 + column_offset - 1)
                     row = start_row15 + day - 1  # Map the day to the corresponding row
                     cell_address = f"{col_letter}{row}"
-                    updates.append({"range": cell_address, "values": [[value]]})
-                    print(f" {employee} |  смена типа {value} | числа: {day} | на арене {dataset} | {cell_address}")
+                    updates.append(
+                        {"range": cell_address, "values": [[value]]})
+                    print(
+                        f" {employee} |  смена типа {value} | числа: {day} | на арене {dataset} | {cell_address}")
         elif days_in_month == 31:
-            for employee, value, day, dataset,tp_shft in employee_shiftsList:
+            for employee, value, day, dataset, tp_shft in employee_shiftsList:
                 if employee in employee_to_column:
                     column_offset = employee_to_column[employee]
-                    col_letter = chr(start_colend + column_offset - 1)  # Convert column index to letter
+                    # Convert column index to letter
+                    col_letter = chr(start_colend + column_offset - 1)
                     row = start_rowend + day - 1  # Map the day to the corresponding row
                     cell_address = f"{col_letter}{row}"
-                    updates.append({"range": cell_address, "values": [[value]]})
-                    print(f" {employee} |  смена типа {value} | числа: {day} | на арене {dataset}")
+                    updates.append(
+                        {"range": cell_address, "values": [[value]]})
+                    print(
+                        f" {employee} |  смена типа {value} | числа: {day} | на арене {dataset}")
         # Batch update the sheet with the new values
         if updates:
             sheetLink.batch_update(updates)
@@ -129,50 +134,56 @@ class Updater:
         # Prepare updates based on employee_shiftsList
         updates = []
         if days_in_month == 15:
-            for employee, value, day, dataset,tp_shft in employee_shiftsList:
+            for employee, value, day, dataset, tp_shft in employee_shiftsList:
                 if employee in employee_to_column:
                     column_offset = employee_to_column[employee]
-                    col_letter = chr(start_col15 + column_offset - 1)  # Convert column index to letter
+                    # Convert column index to letter
+                    col_letter = chr(start_col15 + column_offset - 1)
                     row = start_row15 + day - 1  # Map the day to the corresponding row
                     cell_address = f"{col_letter}{row}"
                     tpSHIFTFIN = QOL.replace_letter(tp_shft)
                     value_fin = dataset+f"_{tpSHIFTFIN}"
-                    updates.append({"range": cell_address, "values": [[value_fin]]})
+                    updates.append(
+                        {"range": cell_address, "values": [[value_fin]]})
                     print(f"{employee} смена в арене {dataset} числа: {day}")
         elif days_in_month == 31:
-            for employee, value, day, dataset,tp_shft in employee_shiftsList:
+            for employee, value, day, dataset, tp_shft in employee_shiftsList:
                 if employee in employee_to_column:
                     column_offset = employee_to_column[employee]
-                    col_letter = chr(start_colend + column_offset - 1)  # Convert column index to letter
+                    # Convert column index to letter
+                    col_letter = chr(start_colend + column_offset - 1)
                     row = start_rowend + day - 1  # Map the day to the corresponding row
                     tpSHIFTFIN = QOL.replace_letter(tp_shft)
                     value_fin = dataset+f"_{tpSHIFTFIN}"
                     cell_address = f"{col_letter}{row}"
-                    updates.append({"range": cell_address, "values": [[value_fin]]})
+                    updates.append(
+                        {"range": cell_address, "values": [[value_fin]]})
                     print(f"{employee} смена в арене {dataset} числа: {day+15}")
         # Batch update the sheet with the new values
         if updates:
             sheetLink.batch_update(updates)
 
-    def update_table_from_lists(sheetLink,*lists) -> None:
+    def update_table_from_lists(sheetLink, *lists) -> None:
         """
         Updates table data for columns with INCOME from TRADEPLACES based on provided lists.
-        
+
         Args:
             lists (list): A list of four lists, each containing tuples with (day_index, value).
             sheetLink: Google Sheets link object to interact with.
         """
         incomeLSTKOM, incomeLSTPIK, incomeLSTJUNE, incomeLSTLM = lists
-        fullincomeList = [incomeLSTKOM, incomeLSTPIK, incomeLSTJUNE, incomeLSTLM]
+        fullincomeList = [incomeLSTKOM,
+                          incomeLSTPIK, incomeLSTJUNE, incomeLSTLM]
         # Define the starting row and columns for the range
         start_row = 21
         columns = ['Q', 'R', 'S', 'T']  # Corresponding columns for each list
-        
+
         # Prepare batch updates
         updates = []
         print("starting update_income")
         for i, data_list in enumerate(fullincomeList):
-            column_letter = columns[i]  # Determine the column based on the list index
+            # Determine the column based on the list index
+            column_letter = columns[i]
             for day_index, value in data_list:
                 # Calculate the row number based on the day index
                 row = start_row + day_index - 1

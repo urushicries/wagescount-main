@@ -3,6 +3,7 @@ import sys
 import os
 import tkinter as tk
 
+
 class UandBundOpt:
     """Класс, содержащий утилитарные методы для настройки DPI, определения пути исполняемого файла
     и проверки масштабирования окна.
@@ -22,9 +23,10 @@ class UandBundOpt:
     def optForWindowSize() -> None:
         """Устанавливает DPI-осведомленность процесса для предотвращения размытия интерфейса."""
         try:
-            ctypes.windll.shcore.SetProcessDpiAwareness(2)  # Per-monitor DPI awareness
+            ctypes.windll.shcore.SetProcessDpiAwareness(
+                2)  # Per-monitor DPI awareness
         except AttributeError:
-            pass 
+            pass
 
     @staticmethod
     def optIfAppIsCompiled() -> str:
@@ -42,18 +44,18 @@ class UandBundOpt:
         screen_height = root.winfo_screenheight()
         root.destroy()
         return scaling_factor, screen_height, screen_width
-    
-    @staticmethod    
+
+    @staticmethod
     def adjust_window_size(screen_width, screen_height, width, height):
         """
         Этот метод настраивает размер и позицию окна в зависимости от разрешения экрана и желаемых размеров.
-        
+
         Аргументы:
             screen_width (int): Ширина экрана.
             screen_height (int): Высота экрана.
             width (int): Желаемая ширина окна.
             height (int): Желаемая высота окна.
-        
+
         Возвращает:
             tuple: Новый размер окна (ширина, высота) и его позиция (x, y).
         """

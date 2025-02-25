@@ -1,12 +1,14 @@
 import tkinter as tk
 
+
 class ResChooser:
     """Диалоговое окно выбора разрешения."""
 
     def __init__(self, parent=None):
         """Создает окно выбора разрешения."""
         self.main_window_res = "1680x850"  # Значение по умолчанию
-        self.RESOLUTIONS = {"small": "1450x720", "medium": "1560x900", "big": "1680x1050"}
+        self.RESOLUTIONS = {"small": "1450x720",
+                            "medium": "1560x900", "big": "1680x1050"}
 
         self.root = tk.Toplevel(parent) if parent else tk.Tk()
         self.root.resizable(0, 0)
@@ -24,10 +26,12 @@ class ResChooser:
         self.root.grid_columnconfigure(0, weight=1)
         self.root.grid_columnconfigure(1, weight=1)
 
-        self.label = tk.Label(self.root, text="Choose preferred resolution:", font=("Arial", 12, "bold"))
+        self.label = tk.Label(
+            self.root, text="Choose preferred resolution:", font=("Arial", 12, "bold"))
         self.label.grid(row=0, column=0)
 
-        self.listbox = tk.Listbox(self.root, selectmode="single", height=len(self.RESOLUTIONS), width=20)
+        self.listbox = tk.Listbox(
+            self.root, selectmode="single", height=len(self.RESOLUTIONS), width=20)
         for res in self.RESOLUTIONS:
             self.listbox.insert("end", res)
         self.listbox.grid(row=1, column=0)
@@ -41,7 +45,8 @@ class ResChooser:
         """Выбор разрешения из списка и закрытие окна."""
         selected = self.listbox.curselection()
         if selected:
-            self.main_window_res = self.RESOLUTIONS[self.listbox.get(selected[0])]
+            self.main_window_res = self.RESOLUTIONS[self.listbox.get(
+                selected[0])]
         self.root.destroy()
 
     def get_resolution(self):

@@ -16,7 +16,7 @@ class Parser:
 
     info_about_income:
         Извлекает данные из таблиц отчетов по общему доходу за каждую смену на каждой арене.
-        
+
     income_from_sheets:
         Находит ячейки, содержащие числовые (финансовые) значения в Google Sheets,
         и возвращает список кортежей (row_index, cell_value).
@@ -24,25 +24,29 @@ class Parser:
     income_from_sheets_v2:
         Извлекает данные о доходах из переданных листов.
     """
-    def parseDataAboutShifts(pattern : int,*sheets) -> tuple | None : 
+    def parseDataAboutShifts(pattern: int, *sheets) -> tuple | None:
         """data for different time\nsheets: KOM | PIK | JUNE | LONDONMALL"""
         sheetKOM, sheetPIK, sheetJUNE, sheetLM = sheets
         if pattern == 15:
-            #1-15 числа
+            # 1-15 числа
             data15KOMENDA = sheetKOM.get(f'A1:M{ffcwp15(sheetKOM)}')
             data15PIK = sheetPIK.get(f'A1:M{ffcwp15(sheetPIK)}')
             data15JUNE = sheetJUNE.get(f'A1:M{ffcwp15(sheetJUNE)}')
             data15LM = sheetLM.get(f'A1:M{ffcwp15(sheetLM)}')
-            return  data15KOMENDA, data15PIK, data15LM, data15JUNE
+            return data15KOMENDA, data15PIK, data15LM, data15JUNE
 
         if pattern == 31:
-            #15-31 числа
-            data31KOMENDA = sheetKOM.get(f'A{ffcwp15(sheetKOM)}:M{ffcwpend(sheetKOM)+20}')
-            data31PIK = sheetPIK.get(f'A{ffcwp15(sheetPIK)}:M{ffcwpend(sheetPIK)+20}')
-            data31JUNE = sheetJUNE.get(f'A{ffcwp15(sheetJUNE)}:M{ffcwpend(sheetJUNE)+20}')
-            data31LM = sheetLM.get(f'A{ffcwp15(sheetLM)}:M{ffcwpend(sheetLM)+20}')
-            return  data31KOMENDA, data31PIK, data31LM, data31JUNE
-        
+            # 15-31 числа
+            data31KOMENDA = sheetKOM.get(
+                f'A{ffcwp15(sheetKOM)}:M{ffcwpend(sheetKOM)+20}')
+            data31PIK = sheetPIK.get(
+                f'A{ffcwp15(sheetPIK)}:M{ffcwpend(sheetPIK)+20}')
+            data31JUNE = sheetJUNE.get(
+                f'A{ffcwp15(sheetJUNE)}:M{ffcwpend(sheetJUNE)+20}')
+            data31LM = sheetLM.get(
+                f'A{ffcwp15(sheetLM)}:M{ffcwpend(sheetLM)+20}')
+            return data31KOMENDA, data31PIK, data31LM, data31JUNE
+
         return None
 
     def parseInfoAboutIncome(client, spreadsheet_id: str, sheet_name: str) -> list:
@@ -95,7 +99,8 @@ class Parser:
 
             if QOL.is_valid_price(cell_value):
                 # Заменяем запятую на точку и удаляем неразрывный пробел
-                cleaned_value = cell_value.replace(",", ".").replace("\xa0", "")
+                cleaned_value = cell_value.replace(
+                    ",", ".").replace("\xa0", "")
                 day_idx += 1
                 try:
                     numeric_value = float(cleaned_value)
@@ -104,10 +109,10 @@ class Parser:
                     continue
                 cells_with_money_type.append((day_idx, numeric_value))
                 print(f"adding this thing to income table - {cleaned_value}")
-        print("вот список из f_c_b_t_c",cells_with_money_type)
+        print("вот список из f_c_b_t_c", cells_with_money_type)
         return cells_with_money_type
 
-    def parseINCOMEfromSHEETS(client:object, month:str, *sheet_ids:tuple) -> tuple[list,list,list,list] :
+    def parseINCOMEfromSHEETS(client: object, month: str, *sheet_ids: tuple) -> tuple[list, list, list, list]:
         """
         Извлекает данные о доходах из переданных листов.
 
@@ -122,23 +127,27 @@ class Parser:
         sheetKOM, sheetPIK, sheetJUNE, sheetLM = sheet_ids
 
         print("INFORMATION ABOUT income IN KOMENDA")
-        list_with_income_KOM = Parser.parseInfoAboutIncome(client,sheetKOM, month)
+        list_with_income_KOM = Parser.parseInfoAboutIncome(
+            client, sheetKOM, month)
         print("INFORMATION ABOUT income IN PIK")
-        list_with_income_PIK = Parser.parseInfoAboutIncome(client,sheetPIK, month)
+        list_with_income_PIK = Parser.parseInfoAboutIncome(
+            client, sheetPIK, month)
         print("INFORMATION ABOUT income IN JUNE")
-        list_with_income_JUNE =Parser.parseInfoAboutIncome(client,sheetJUNE, month)
+        list_with_income_JUNE = Parser.parseInfoAboutIncome(
+            client, sheetJUNE, month)
         print("INFORMATION ABOUT income IN LM")
-        list_with_income_LM = Parser.parseInfoAboutIncome(client,sheetLM, month)
+        list_with_income_LM = Parser.parseInfoAboutIncome(
+            client, sheetLM, month)
         return list_with_income_KOM, list_with_income_PIK, list_with_income_JUNE, list_with_income_LM
 
-    def parseDataNamesShift(*datasets:tuple) -> list:
+    def parseDataNamesShift(*datasets: tuple) -> list:
         """
         Parses employee shifts from multiple datasets.
-        
+
         Params:
             datasets: Variable number of datasets (e.g., dataKOM, data15PIK, etc.).
                     Each dataset is a list of rows, where each row is a list of cell strings.
-        
+
         Returns:
             list: A list of tuples (name, shift, day_index, dataset_name), where:
                 - name (str): Employee name.
@@ -169,7 +178,8 @@ class Parser:
                                         continue  # Skip if splitting fails
                                     name = name.strip()
                                     try:
-                                        shift_stru,type_of_shift = shift_str.split(";",1)
+                                        shift_stru, type_of_shift = shift_str.split(
+                                            ";", 1)
                                     except ValueError:
                                         continue
                                     type_of_shift = type_of_shift.strip(")")
@@ -178,8 +188,11 @@ class Parser:
                                         shift = float(shift_num)
                                     except ValueError:
                                         continue  # Skip invalid shift values
-                                    print(f"name: {name} | shift: {shift} | on day {day_index}")
-                                    employee_shifts.append((name, shift, day_index, dataset_name, type_of_shift))
-                                    print("вот тебе один вывод",(name, shift, day_index, dataset_name, type_of_shift))
+                                    print(
+                                        f"name: {name} | shift: {shift} | on day {day_index}")
+                                    employee_shifts.append(
+                                        (name, shift, day_index, dataset_name, type_of_shift))
+                                    print("вот тебе один вывод", (name, shift,
+                                          day_index, dataset_name, type_of_shift))
 
         return employee_shifts

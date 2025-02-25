@@ -19,7 +19,7 @@ class infoVariables:
     infoaboutWagesFunc = (
         "Wage calculation function:\n"
         "Calculates the total number of shifts\n"
-          "for the selected period."
+        "for the selected period."
     )
 
     # Text describing the income calculation function for retail locations (arenas)
@@ -29,13 +29,14 @@ class infoVariables:
     )
 
     # Text describing the function for daily wage calculation
-    infoAboutShiftEverydayFunc = ("Calculates daily wages\n tracks worker location,\n and assigns shifts by day." )
+    infoAboutShiftEverydayFunc = (
+        "Calculates daily wages\n tracks worker location,\n and assigns shifts by day.")
 
     infoAboutDeleteButton = ("Deletes all input info from table")
 
-    #data variables for computations
+    # data variables for computations
     days_in_month = 31
-    sheetKOM =  None
+    sheetKOM = None
     shtKOM_id = "1vAVIeR4UWVAx7KwAR6x23yT_Ha1KTuc8VjcTVjnTM_8"
 
     sheetPIK = None
@@ -54,5 +55,3 @@ class infoVariables:
     dataJUNE = None
 
     dataLM = None
-
-    

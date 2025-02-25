@@ -98,6 +98,7 @@ wagescount.update_info_WAGES(employee_shift_dict, employee_shifts, sheetWGSlist)
 ```
 
 Функции из модулей:
+
 - `ffcwp15(sheet)` — находит первую ячейку с форматом `15.xx.xxxx` в первом столбце.
 - `ffcwpend(sheet)` — находит первую ячейку с одним из форматов (`31.xx.xxxx`, `30.xx.xxxx` и т.д.) с приоритетом 31, 30, 29, 28.
 - `makeDataFromSheets(pattern, *sheets)` — получает данные из нескольких листов для указанного периода (15 или 31).
@@ -110,7 +111,6 @@ wagescount.update_info_WAGES(employee_shift_dict, employee_shifts, sheetWGSlist)
 - `update_table_from_lists(sheetLink, *lists)` — обновляет таблицу доходов.
 - `clear_wgslist_ranges(service, spreadsheet_id, ranges)` — очищает заданные диапазоны в таблице.
 - `toggle_cell_value(sheet, days_in_month)` — переключает значение ячейки (E93) в зависимости от выбранного периода.
-
 
 ## Вклад в проект
 
