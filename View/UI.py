@@ -243,7 +243,7 @@ class UiManager:
             bg="black", fg="lightgreen",
             font=("Arial", int(15 * self.scale_factor))
         )
-        self.label_success_info.grid(row=5, column=2)
+        self.label_success_info.grid(row=6, column=3)
 
     def run(self):
         self.root.mainloop()
