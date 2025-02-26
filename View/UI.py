@@ -221,7 +221,7 @@ class UiManager:
         # Надпись внизу
         self.label_footer_info = tk.Label(
             self.root,
-            text="закрываю глаза, а там все еще ты...\nDose, FEDUK\nver 0.0.9",
+            text="отдай тепло...\nMax Korzh\nver 0.1.2",
             bg="black", fg="white",
             font=("Arial", int(14 * self.scale_factor), "bold")
         )

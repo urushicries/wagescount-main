@@ -7,11 +7,13 @@ from googleapiclient.discovery import build
 
 
 # Model
-from Model.UPDT import Updater  # модуль с методами обновления таблицы ЗП
-# Модуль с методами с копированием информации с отчетов и компоновкой ее в удобоворимый формат для обновления.
+from Model.UPDT import Updater
+
 from Model.PARSmod import Parser
+
 # View
-from View.UI import UiManager  # Модуль с настройкой UI и его функциональности
+from View.UI import UiManager
+
 # Presenter
 from Presenter.presenter import WebPresenter
 
