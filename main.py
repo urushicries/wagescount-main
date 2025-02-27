@@ -8,7 +8,6 @@ from googleapiclient.discovery import build
 
 # Model
 from Model.UPDT import Updater
-
 from Model.PARSmod import Parser
 
 # View
