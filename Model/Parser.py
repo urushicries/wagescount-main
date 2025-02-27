@@ -1,5 +1,5 @@
 import gspread
-from Model.FFCWP import ffcwp15, ffcwpend
+from Model.FFCWP import ffcwp
 from Addons.QOLmodule import QOL
 
 
@@ -29,22 +29,22 @@ class Parser:
         sheetKOM, sheetPIK, sheetJUNE, sheetLM = sheets
         if pattern == 15:
             # 1-15 числа
-            data15KOMENDA = sheetKOM.get(f'A1:M{ffcwp15(sheetKOM)}')
-            data15PIK = sheetPIK.get(f'A1:M{ffcwp15(sheetPIK)}')
-            data15JUNE = sheetJUNE.get(f'A1:M{ffcwp15(sheetJUNE)}')
-            data15LM = sheetLM.get(f'A1:M{ffcwp15(sheetLM)}')
+            data15KOMENDA = sheetKOM.get(f'A1:M{ffcwp.ffcwp15(sheetKOM)}')
+            data15PIK = sheetPIK.get(f'A1:M{ffcwp.ffcwp15(sheetPIK)}')
+            data15JUNE = sheetJUNE.get(f'A1:M{ffcwp.ffcwp15(sheetJUNE)}')
+            data15LM = sheetLM.get(f'A1:M{ffcwp.ffcwp15(sheetLM)}')
             return data15KOMENDA, data15PIK, data15LM, data15JUNE
 
         if pattern == 31:
             # 15-31 числа
             data31KOMENDA = sheetKOM.get(
-                f'A{ffcwp15(sheetKOM)}:M{ffcwpend(sheetKOM)+20}')
+                f'A{ffcwp.ffcwp15(sheetKOM)}:M{ffcwp.ffcwpend(sheetKOM)+20}')
             data31PIK = sheetPIK.get(
-                f'A{ffcwp15(sheetPIK)}:M{ffcwpend(sheetPIK)+20}')
+                f'A{ffcwp.ffcwp15(sheetPIK)}:M{ffcwp.ffcwpend(sheetPIK)+20}')
             data31JUNE = sheetJUNE.get(
-                f'A{ffcwp15(sheetJUNE)}:M{ffcwpend(sheetJUNE)+20}')
+                f'A{ffcwp.ffcwp15(sheetJUNE)}:M{ffcwp.ffcwpend(sheetJUNE)+20}')
             data31LM = sheetLM.get(
-                f'A{ffcwp15(sheetLM)}:M{ffcwpend(sheetLM)+20}')
+                f'A{ffcwp.ffcwp15(sheetLM)}:M{ffcwp.ffcwpend(sheetLM)+20}')
             return data31KOMENDA, data31PIK, data31LM, data31JUNE
 
         return None

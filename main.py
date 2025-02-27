@@ -7,8 +7,8 @@ from googleapiclient.discovery import build
 
 
 # Model
-from Model.UPDT import Updater
-from Model.PARSmod import Parser
+from Model.Updater import Updater
+from Model.Parser import Parser
 
 # View
 from View.UI import UiManager

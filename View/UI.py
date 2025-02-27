@@ -4,6 +4,7 @@ from tkinter import BooleanVar
 
 
 class UiManager:
+
     """
     View – отвечает за отрисовку UI и сбор пользовательского ввода.
     """
@@ -221,7 +222,7 @@ class UiManager:
         # Надпись внизу
         self.label_footer_info = tk.Label(
             self.root,
-            text="отдай тепло...\nMax Korzh\nver 0.1.2",
+            text="why get less?\nwhen u can get more\nver 0.1.4",
             bg="black", fg="white",
             font=("Arial", int(14 * self.scale_factor), "bold")
         )

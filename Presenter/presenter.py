@@ -21,7 +21,7 @@ class WebPresenter:
     def send_request(self, month, checkboxes, days_in_month):
         """
         checkboxes – словарь с булевыми значениями для ключей:
-          'wages'  – для всей зарплаты,
+          'wages' – для всей зарплаты,
           'income' – для дохода из арен,
           'shifts' – для смен за каждый день.
         """
