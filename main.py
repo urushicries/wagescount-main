@@ -77,7 +77,7 @@ if __name__ == "__main__":
     scaling_factor, screen_height, screen_width = UandBundOpt.checkWindowDPI()
 
     root = tk.Tk()
-    root.resizable(0, 0)
+    root.resizable(False, False)
     root.title("Программа для расчет З/П Another World")
 
     window_width, window_height, position_x, position_y, scale_factor = UandBundOpt.adjust_window_size(

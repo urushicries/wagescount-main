@@ -70,7 +70,7 @@ client = gspread.authorize(credentials)
 Ниже приведён пример интеграции основных функций из модуля:
 
 ```python
-import wagescount
+import wagescount-main
 
 # Авторизация и подключение к Google Sheets
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
