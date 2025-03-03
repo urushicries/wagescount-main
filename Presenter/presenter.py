@@ -4,7 +4,7 @@ class WebPresenter:
     def __init__(self, view, client, QOL, Parser, Updater, infoVariables,
                  service, sheetWAGES, shtKOM_id, shtPIK_id, shtJUN_id, shtLM_id):
 
-        self.view = view  # Ссылка на View (UiManager)
+        self.view = view
         self.client = client
         self.QOL = QOL
         self.Parser = Parser
@@ -16,7 +16,8 @@ class WebPresenter:
         self.shtPIK_id = shtPIK_id
         self.shtJUN_id = shtJUN_id
         self.shtLM_id = shtLM_id
-        self.days_in_month = 15
+        self.days_in_month = 31
+
 
     def send_request(self, month, checkboxes, days_in_month):
         """
@@ -30,7 +31,6 @@ class WebPresenter:
             self.view.nothing_picked()
             return
 
-        # Данные по месяцам
         months_data = {
             "Январь": {"sheet_suffix": "Январь25", "days": days_in_month},
             "Февраль": {"sheet_suffix": "Февраль25", "days": days_in_month},
@@ -45,6 +45,7 @@ class WebPresenter:
             "Ноябрь": {"sheet_suffix": "Ноябрь25", "days": days_in_month},
             "Декабрь": {"sheet_suffix": "Декабрь25", "days": days_in_month}
         }
+
 
         month_data = months_data.get(month)
         if not month_data:
@@ -99,13 +100,11 @@ class WebPresenter:
             self.view.success()
         except Exception as e:
             print(f"Error occurred while processing sheets for {month}: {e}")
-            self.view.show_error(str(e))
+            self.view.show_error("Problem with ", str(e))
 
     def sentRdelete(self):
-        # Пример метода для удаления диапазонов; бизнес-логика в Presenter
         self.QOL.clear_wgslist_ranges(
             self.service, "14FtsvGplg1jKXJvLJCueI8iEEnjJUtjk17NuPqeCnqo")
 
     def toggle_RP_button(self, days_in_month):
-        # Пример вызова бизнес-логики из QOL
         self.QOL.toggle_cell_value(self.sheetWAGES, days_in_month)
