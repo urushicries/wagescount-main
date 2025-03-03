@@ -17,18 +17,18 @@ from View.UI import UiManager
 from Presenter.presenter import WebPresenter
 
 # addons
-from Addons.RES import ResChooser  # Модуль выбора разрешения окна проги
+from Addons.ResChooser import ResChooser  # Модуль выбора разрешения окна проги
 # Модуль оптимизации размера окна под масштаб(в винде под ноуты)
-from Addons.DIRandUI import UandBundOpt
-# Модуль с информациооными переменными
-from Addons.VARIABLES import infoVariables
+from Addons.OptimizedWindows import OptimizedWindows
+# Модуль с информационными переменными
+from Addons.VARIABLES_WC import Variables_WC
 # Модуль с методами для упрощения жизни (quality of life)
-from Addons.QOLmodule import QOL
+from Addons.QOL import QOL
 
 if __name__ == "__main__":
 
-    UandBundOpt.optForWindowSize()
-    bundle_dir = UandBundOpt.optIfAppIsCompiled()
+    OptimizedWindows.optForWindowSize()
+    bundle_dir = OptimizedWindows.optIfAppIsCompiled()
 
     # Define the relative path
     relative_path = "key.json"
@@ -55,40 +55,41 @@ if __name__ == "__main__":
     service = build('sheets', 'v4', credentials=credentials)
     sheetWAGES = client.open("! Таблица расчета зарплаты").worksheet("WGSlist")
 
-    days_in_month = infoVariables.days_in_month
-    sheetKOM = infoVariables.sheetKOM
-    shtKOM_id = infoVariables.shtKOM_id
-    sheetPIK = infoVariables.sheetPIK
-    shtPIK_id = infoVariables.shtPIK_id
-    sheetJUNE = infoVariables.sheetJUNE
-    shtJUN_id = infoVariables.shtJUN_id
-    sheetLM = infoVariables.sheetLM
-    shtLM_id = infoVariables.shtLM_id
-    dataKOM = infoVariables.dataKOM
-    dataPIK = infoVariables.dataPIK
-    dataJUNE = infoVariables.dataJUNE
-    dataLM = infoVariables.dataLM
+    days_in_month = Variables_WC.days_in_month
+    sheetKOM = Variables_WC.sheetKOM
+    shtKOM_id = Variables_WC.shtKOM_id
+    sheetPIK = Variables_WC.sheetPIK
+    shtPIK_id = Variables_WC.shtPIK_id
+    sheetJUNE = Variables_WC.sheetJUNE
+    shtJUN_id = Variables_WC.shtJUN_id
+    sheetLM = Variables_WC.sheetLM
+    shtLM_id = Variables_WC.shtLM_id
+    dataKOM = Variables_WC.dataKOM
+    dataPIK = Variables_WC.dataPIK
+    dataJUNE = Variables_WC.dataJUNE
+    dataLM = Variables_WC.dataLM
 
+    QOL.ensure_cell_value(sheetWAGES,31)
     # вызываю выбор разрешения
     chooser = ResChooser()
     selected_resolution = chooser.get_resolution()
 
     width, height = map(int, selected_resolution.split("x"))
-    scaling_factor, screen_height, screen_width = UandBundOpt.checkWindowDPI()
+    scaling_factor, screen_height, screen_width = OptimizedWindows.checkWindowDPI()
 
     root = tk.Tk()
     root.resizable(False, False)
-    root.title("Программа для расчет З/П Another World")
+    root.title("Программа для расчета З/П Another World")
 
-    window_width, window_height, position_x, position_y, scale_factor = UandBundOpt.adjust_window_size(
+    window_width, window_height, position_x, position_y, scale_factor = OptimizedWindows.adjust_window_size(
         screen_width, screen_height, width, height)
     root.geometry(f"{window_width}x{window_height}+{position_x}+{position_y}")
 
     # Создаём экземпляр View
-    ui = UiManager(root, QOL, infoVariables, scale_factor)
+    ui = UiManager(root, QOL, Variables_WC, scale_factor)
 
     # Создаем Presenter, передавая в него все необходимые зависимости и ссылку на View
-    presenter = WebPresenter(ui, client, QOL, Parser, Updater, infoVariables,
+    presenter = WebPresenter(ui, client, QOL, Parser, Updater, Variables_WC,
                              service, sheetWAGES, shtKOM_id, shtPIK_id, shtJUN_id, shtLM_id)
 
     # Передаем Presenter в View
