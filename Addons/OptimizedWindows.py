@@ -4,7 +4,7 @@ import os
 import tkinter as tk
 
 
-class UandBundOpt:
+class OptimizedWindows:
     """Класс, содержащий утилитарные методы для настройки DPI, определения пути исполняемого файла
     и проверки масштабирования окна.
 

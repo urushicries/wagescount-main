@@ -1,5 +1,5 @@
 
-class infoVariables:
+class Variables_WC:
     """Класс, содержащий текстовые инструкции и описания функций расчета.
 
     Атрибуты:
@@ -32,7 +32,14 @@ class infoVariables:
     infoAboutShiftEverydayFunc = (
         "Calculates daily wages\n tracks worker location,\n and assigns shifts by day.")
 
-    infoAboutDeleteButton = ("Deletes all input info from table")
+    infoAboutDeleteButton = "Deletes all input info from table"
+
+    income_from_shopsINFO = "Count income from shops?"
+    months = [
+        "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
+        "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
+    ]
+
 
     # data variables for computations
     days_in_month = 31
