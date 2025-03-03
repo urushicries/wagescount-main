@@ -31,15 +31,7 @@
 1. **Клонируйте репозиторий:**
 
    ```bash
-   git clone https://github.com/yourusername/wagescount.git
-   ```
-
-2. **Создайте виртуальное окружение и активируйте его:**
-
-   ```bash
-   cd wagescount
-   python -m venv venv
-   source venv/bin/activate  # Для Windows: venv\Scripts\activate
+   git clone https://github.com/urushicries/wagescount-main.git
    ```
 
 3. **Установите зависимости:**
@@ -112,6 +104,4 @@ wagescount.update_info_WAGES(employee_shift_dict, employee_shifts, sheetWGSlist)
 - `clear_wgslist_ranges(service, spreadsheet_id, ranges)` — очищает заданные диапазоны в таблице.
 - `toggle_cell_value(sheet, days_in_month)` — переключает значение ячейки (E93) в зависимости от выбранного периода.
 
-## Вклад в проект
-
-Если у вас есть предложения или вы обнаружили ошибку, создайте issue или отправьте pull request с улучшениями.
+### - _made by urushi for AW_
