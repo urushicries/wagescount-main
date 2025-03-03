@@ -1,4 +1,4 @@
-from Addons.QOLmodule import QOL
+from Addons.QOL import QOL
 
 
 class Updater:
