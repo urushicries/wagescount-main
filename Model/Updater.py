@@ -17,6 +17,7 @@ class Updater:
 
     Все методы используют пакетное обновление для оптимизации работы с таблицами.
     """
+
     def update_info_WAGES(employee_shift_dict: dict, sheetLink) -> None:
         """
         Обновляет информацию о сменах сотрудников в таблице заработной платы.
@@ -142,7 +143,7 @@ class Updater:
                     row = start_row15 + day - 1  # Map the day to the corresponding row
                     cell_address = f"{col_letter}{row}"
                     tpSHIFTFIN = QOL.replace_letter(tp_shft)
-                    value_fin = dataset+f"_{tpSHIFTFIN}"
+                    value_fin = dataset + f"_{tpSHIFTFIN}"
                     updates.append(
                         {"range": cell_address, "values": [[value_fin]]})
                     print(f"{employee} смена в арене {dataset} числа: {day}")
@@ -154,11 +155,11 @@ class Updater:
                     col_letter = chr(start_colend + column_offset - 1)
                     row = start_rowend + day - 1  # Map the day to the corresponding row
                     tpSHIFTFIN = QOL.replace_letter(tp_shft)
-                    value_fin = dataset+f"_{tpSHIFTFIN}"
+                    value_fin = dataset + f"_{tpSHIFTFIN}"
                     cell_address = f"{col_letter}{row}"
                     updates.append(
                         {"range": cell_address, "values": [[value_fin]]})
-                    print(f"{employee} смена в арене {dataset} числа: {day+15}")
+                    print(f"{employee} смена в арене {dataset} числа: {day + 15}")
         # Batch update the sheet with the new values
         if updates:
             sheetLink.batch_update(updates)
@@ -196,3 +197,35 @@ class Updater:
 
         if updates:
             sheetLink.batch_update(updates)
+
+    @staticmethod
+    def send_emp_list(emp_list: list, sheetlink) -> None:
+        """
+        Функция предназначена для замены списка работников.
+
+        :param sheetlink:
+            Объект Google Sheet.
+        :param emp_list:
+            Список работников из EMP_creator.
+        :return:
+            None
+        """
+        length_emp = len(emp_list)
+        if length_emp == 0:
+            return
+
+        updates = []
+        try:
+            for i_, emp in enumerate(emp_list):
+                cell_address = f"C{97 + i_}"  # Исправил ошибку с индексами
+                updates.append({"range": cell_address, "values": [[emp]]})  # `values` должен быть списком списков
+
+        except Exception as e:
+            print(f"Что-то пошло не так: {e}")
+
+        if updates:
+            try:
+                sheetlink.batch_update(updates)
+                print("Список сотрудников успешно обновлён!")
+            except Exception as e:
+                print(f"Ошибка при обновлении таблицы: {e}")

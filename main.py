@@ -24,6 +24,7 @@ from Addons.OptimizedWindows import OptimizedWindows
 from Addons.VARIABLES_WC import Variables_WC
 # Модуль с методами для упрощения жизни (quality of life)
 from Addons.QOL import QOL
+from Addons.EMP_Creator import EMP_list_creator
 
 if __name__ == "__main__":
 
@@ -70,6 +71,11 @@ if __name__ == "__main__":
     dataLM = Variables_WC.dataLM
 
     QOL.ensure_cell_value(sheetWAGES,31)
+    #Вызываю набор списка работников
+    empCRTR = EMP_list_creator()
+    list_of_emp = empCRTR.get_list()
+    Updater.send_emp_list(list_of_emp,sheetWAGES)
+
     # вызываю выбор разрешения
     chooser = ResChooser()
     selected_resolution = chooser.get_resolution()

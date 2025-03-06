@@ -125,7 +125,7 @@ class UiManager:
         # Переключить РП
         self.toggle_button = tk.Button(
             self.root,
-            text="Change period?🔄",
+            text="Change period?🌗",
             font=("Roboto", int(30 * self.scale_factor)),
             bg="white", fg="black", padx=btn_width//2,
             command=self.toggle_days
