@@ -17,14 +17,11 @@ from View.UI import UiManager
 from Presenter.presenter import WebPresenter
 
 # addons
-from Addons.ResChooser import ResChooser  # Модуль выбора разрешения окна проги
-# Модуль оптимизации размера окна под масштаб(в винде под ноуты)
-from Addons.OptimizedWindows import OptimizedWindows
-# Модуль с информационными переменными
-from Addons.VARIABLES_WC import Variables_WC
-# Модуль с методами для упрощения жизни (quality of life)
-from Addons.QOL import QOL
-from Addons.EMP_Creator import EMP_list_creator
+from Addons.ResChooser import ResChooser  #Выбор размер окна
+from Addons.EMP_Creator import EMP_list_creator #Создание списка или изменение списка работников при необходимости
+from Addons.OptimizedWindows import OptimizedWindows #Оптимизация под масштаб в винде(для ноутов)
+from Addons.VARIABLES_WC import Variables_WC # Модуль с информационными переменными
+from Addons.QOL import QOL # Модуль с методами для упрощения жизни
 
 if __name__ == "__main__":
 
@@ -85,7 +82,7 @@ if __name__ == "__main__":
 
     root = tk.Tk()
     root.resizable(False, False)
-    root.title("Программа для расчета З/П Another World")
+    root.title("shifts and income AW")
 
     window_width, window_height, position_x, position_y, scale_factor = OptimizedWindows.adjust_window_size(
         screen_width, screen_height, width, height)

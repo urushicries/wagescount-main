@@ -6,7 +6,7 @@ from tkinter import BooleanVar
 class UiManager:
 
     """
-    View – отвечает за отрисовку UI и сбор пользовательского ввода.
+    UiManager – отвечает за отрисовку UI и сбор пользовательского ввода.
     """
 
     def __init__(self, root, QOL, infoVariables, scale_factor=1):
@@ -234,7 +234,7 @@ class UiManager:
         # Надпись внизу
         self.label_footer_info = tk.Label(
             self.root,
-            text="why get less?\nwhen u can get more\nver 0.1.4",
+            text="would i lose?\nnah i'd win\nver 0.1.8",
             bg="black", fg="white",
             font=("Arial", int(14 * self.scale_factor), "bold")
         )
