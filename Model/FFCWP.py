@@ -2,6 +2,22 @@ import re
 
 
 class ffcwp:
+    """ 
+    The `ffcwp` class provides static methods to find specific patterns in the first column of a sheet and process data from multiple sheets based on a given pattern.
+
+        Methods:
+            find_first_matching_cell(sheet, patterns):
+
+            ffcwp15(sheet):
+
+            ffcwpend(sheet):
+
+            makeDataFromSheets(pattern: int, *sheets) -> tuple | None:
+                Processes data from sheets by some pattern.
+                    pattern (int): Key for calculation either until the end of the month or until the middle.
+                    sheets (tuple): Report tables.
+                    tuple | None: A tuple containing data from the sheets based on the pattern, or None if the pattern is not recognized.
+        """
     @staticmethod
     def find_first_matching_cell(sheet, patterns):
         """

@@ -4,10 +4,28 @@ from tkinter import BooleanVar
 
 
 class UiManager:
+    """
+    Manages the user interface for the application.
 
+    Attributes:
+        root (tk.Tk): The root window of the Tkinter application.
+        QOL (object): Quality of Life object, purpose not specified.
+        infoVariables (object): Contains various information variables used in the UI.
+        scale_factor (float): Scaling factor for UI elements, default is 1.
+        days_in_month (int): Number of days in the current period, default is 31.
+        presenter (object): Presenter object to handle business logic, set externally.
+
+    Methods:
+        nothing_picked(): Displays an error message when no function is selected.
+        success(): Displays a success message.
+        show_error(message): Displays a custom error message.
+        on_button_click(month): Handles button click events for month buttons, delegates to presenter.
+        toggle_days(): Toggles the period between 15 and 31 days and updates the UI.
+        delete_ranges(): Handles the delete button click event, delegates to presenter.
+        setup_ui(): Sets up the user interface elements.
+        run(): Starts the Tkinter main loop.
     """
-    UiManager – отвечает за отрисовку UI и сбор пользовательского ввода.
-    """
+
 
     def __init__(self, root, QOL, infoVariables, scale_factor=1):
         # инициализация объектов переменных для объектов интерфейса
@@ -44,21 +62,65 @@ class UiManager:
 
     # Методы, вызываемые Presenter-ом для отображения сообщений:
     def nothing_picked(self):
+        """
+        Displays an error message indicating that at least one function must be selected.
+        
+        This method updates the `label_error_info` widget to show an error message
+        in Russian, prompting the user to select at least one function. The message
+        is displayed in bold Arial font with a size of 20. After 3 seconds, the 
+        error message is cleared.
+        """
         self.label_error_info.config(
             text="Выберите хотя бы \nодну функцию❎", font=("Arial", 20, "bold"))
         self.root.after(3000, lambda: self.label_error_info.config(text=""))
 
     def success(self):
+        """
+        Displays a success message on the label_success_info widget for 3 seconds.
+
+        This method updates the text of the label_success_info widget to display
+        a success message "Успех!☑" with a specific font style. After 3 seconds,
+        the text is cleared.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         self.label_success_info.config(
             text="Успех!☑", font=("Arial", 30, "bold"))
         self.root.after(3000, lambda: self.label_success_info.config(text=""))
 
     def show_error(self, message):
+        """
+        Displays an error message on the UI for a short duration.
+
+        Args:
+            message (str): The error message to be displayed.
+        """
         self.label_error_info.config(text=message, font=("Arial", 30, "bold"))
         self.root.after(3000, lambda: self.label_error_info.config(text=""))
 
     # Обработчик нажатия кнопки месяца – делегирует вызов презентеру
     def on_button_click(self, month):
+        """
+        Handles the button click event for a given month.
+
+        This method retrieves the state of various checkboxes and sends a request
+        to the presenter with the selected month, checkbox states, and the number
+        of days in the month. If the presenter is not set, it prints an error message.
+
+        Args:
+            month (str): The month for which the request is being made.
+
+        Attributes:
+            t_wages_whole_month_var1 (tkinter.Variable): Variable linked to the 'wages' checkbox.
+            t_income_from_shops_var2 (tkinter.Variable): Variable linked to the 'income' checkbox.
+            t_set_up_shifts_for_all_days_var3 (tkinter.Variable): Variable linked to the 'shifts' checkbox.
+            presenter (object): The presenter object responsible for handling the request.
+            days_in_month (int): The number of days in the selected month.
+        """
         checkboxes = {
             'wages': self.t_wages_whole_month_var1.get(),
             'income': self.t_income_from_shops_var2.get(),
@@ -88,12 +150,52 @@ class UiManager:
             print("Поменял РП с \"16 до 31\" на \"1 до 15\" ")
 
     def delete_ranges(self):
+        """
+        Deletes the selected ranges.
+
+        This method is triggered when the delete button is pressed. It delegates the
+        delete action to the presenter, which handles the actual deletion process.
+        If the presenter is available, it calls the `sentRdelete` method on the presenter
+        and then calls the `success` method to indicate the successful deletion.
+
+        Returns:
+            None
+        """
         # При нажатии кнопки удаления делегируем вызов Presenter-у
         if self.presenter:
             self.presenter.sentRdelete()
             self.success()
 
     def setup_ui(self):
+        """
+        Sets up the user interface for the application.
+
+        This method configures the main window and adds various widgets such as buttons,
+        checkboxes, and labels to the interface. The layout is managed using a grid system.
+
+        Widgets:
+            - Buttons for each month.
+            - Toggle button to change the period.
+            - Button to clear all data.
+            - Checkboxes for various options.
+            - Labels for displaying information and instructions.
+
+        Grid Layout:
+            - The buttons are arranged in a grid with a specified number of columns.
+            - The columns and rows are configured to distribute space evenly.
+
+        Attributes:
+            self.root (tk.Tk): The main window of the application.
+            self.scale_factor (float): Scaling factor for adjusting widget sizes.
+            self.infoVariables (object): An object containing various information variables.
+            self.days_in_month (int): Number of days in the current month.
+
+        Methods:
+            on_button_click(month): Handles button click events for month buttons.
+            toggle_days(): Toggles the display of days.
+            delete_ranges(): Deletes all data ranges.
+        """
+        
         self.root.configure(bg="black")
         btn_width = int(22 * self.scale_factor)
         font_size = int(25 * self.scale_factor)

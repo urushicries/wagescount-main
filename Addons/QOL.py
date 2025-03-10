@@ -2,40 +2,57 @@
 
 class QOL:
     """
-    Класс QOL (Quality of Life) содержит вспомогательные методы для работы с текстом, 
-    обработкой данных сотрудников и управления Google Sheets через API.
+    The QOL class provides a set of static methods for various utility operations, 
+    including string replacement, price validation, dictionary creation from lists, 
+    employee processing from Google Sheets, clearing specific ranges in Google Sheets, 
+    and ensuring/updating cell values in Google Sheets.
 
-    Методы:
-        replace_letter(letter: str) -> str:
-            Заменяет английские буквы A, O, C на соответствующие русские аналоги.
+        Methods:
+            replace_letter(letter: str) -> str:
+                Replaces specific English letters (A, O, C) with their Russian counterparts.
 
-        is_valid_price(cell_value: str) -> bool:
-            Проверяет, соответствует ли строка формату цены с окончанием ",00".
+            is_valid_price(cell_value: str) -> bool:
+                Checks if a string matches the price format ending with ",00".
 
-        makeDictEmpTot(emp_shift: list) -> dict:
-            Преобразует список смен сотрудников в словарь с их общим временем смен.
+            makeDictEmpTot(emp_shift: list) -> dict:
+                Converts a list of employee shifts into a dictionary with employee names as keys and total shifts as values.
 
-        process_employees(worksheet: object) -> dict:
-            Обрабатывает данные сотрудников из строки 20 рабочего листа Google Sheets 
-            и создает словарь, где ключ — имя сотрудника, а значение — порядковый номер.
+            process_employees(worksheet: object) -> dict:
+                Processes employees from row 20 of a Google Sheets worksheet, creating a dictionary with cell values or placeholders as keys and their order as values.
 
-        clear_wgslist_ranges(service: object, spreadsheet_id: str) -> None:
-            Очищает заданные диапазоны данных в таблице Google Sheets.
+            clear_wgslist_ranges(service: object, spreadsheet_id: str) -> None:
+                Clears data from specified ranges in a Google Sheets document.
 
-        toggle_cell_value(sheet: object, days_in_month: int) -> None:
-            (Метод не реализован) Переключает значения ячеек в зависимости от количества дней в месяце.
+            toggle_cell_value(sheet: object, days_in_month: int) -> None:
+                Toggles the value of cell E93 in the WGSlist sheet between "31" and "15" based on the provided days_in_month.
 
-        ensure_cell_value(sheet: object, days_in_month: int) -> None:
-            Убедиться, что значение ячейки соответствует количеству дней в месяце.
+            ensure_cell_value(sheet: object, days_in_month: int) -> None:
+                Ensures that the value of cell E93 in the WGSlist sheet matches the provided days_in_month, updating it if necessary.
     """
+
     @staticmethod
     def replace_letter(letter: str) -> str:
-        """Меняет английские А и О, С на русские"""
+        """
+        Replaces Latin letters with their Cyrillic equivalents.
+        Args:
+            letter (str): The Latin letter to be replaced.
+        Returns:
+            str: The corresponding Cyrillic letter if a match is found; otherwise, returns the original letter.
+        """
+        
         return {"A": "А", "O": "О","C": "О","С":"О"}.get(letter, letter)
 
     @staticmethod
     def is_valid_price(cell_value:str) -> bool:
-        """Проверяет, соответствует ли строка формату цены с ,00 в конце."""
+        """
+        Checks if the string matches the price format ending with ',00'.
+
+        Args:
+            cell_value (str): The string to check.
+
+        Returns:
+            bool: True if the string ends with ',00', False otherwise.
+        """
         if ",00"  in cell_value:
             return True
         else:
@@ -43,7 +60,20 @@ class QOL:
 
     @staticmethod
     def makeDictEmpTot (emp_shift:list) -> dict:
-        """emp_shift list to dictionary"""
+        """
+            Converts a list of employee shifts into a dictionary with total shift hours per employee.
+
+            Args:
+                emp_shift (list): A list of tuples, where each tuple contains:
+                    - employee (str): The name or identifier of the employee.
+                    - shift (int or float): The number of hours worked in a shift.
+                    - j_ (any): An additional parameter (unused in this function).
+                    - i_ (any): An additional parameter (unused in this function).
+                    - o_ (any): An additional parameter (unused in this function).
+
+            Returns:
+                dict: A dictionary where the keys are employee names/identifiers and the values are the total shift hours for each employee.
+        """
         employee_totals = {}
 
         for employee, shift, j_ , i_, o_ in emp_shift:
@@ -55,20 +85,13 @@ class QOL:
 
     @staticmethod
     def process_employees(worksheet:object) -> dict:
-        """
-        Обрабатывает сотрудников из двух строк рабочего листа Google Sheets:
+        """     
+            Processes the employees listed in row 20 of the given worksheet.
 
-        Для строки 20:
-        - Начинаем с колонки D (индекс 3).
-        - Перебираем ячейки до ячейки, содержащей "Коменда".
-        - Аналогичным образом обрабатываем значение ячейки, заменяя пустые на "_" и присваивая порядковый номер.
-
-        Args:
-            worksheet: объект рабочего листа Google Sheets.
-            
-        Returns:
-            словарь:
-            - Второй словарь (row20_dict): ключ — значение ячейки (или "_" для пустых), значение — порядковый номер в строке 20.
+            Args:
+                worksheet (object): The worksheet object from which to extract employee data.
+            Returns:
+                dict: A dictionary where the keys are employee names (or placeholders) and the values are their respective order numbers.
         """
 
         # Обработка строки 20
@@ -136,7 +159,7 @@ class QOL:
     @staticmethod
     def ensure_cell_value(sheet: object, days_in_month: int) -> None:
         """
-        Функция призваан убедиться, что у нас в ключе РП в таблице стоит верное значение.
+        Функция призвана убедиться, что у нас в ключе РП в таблице стоит верное значение.
         Если текущее значение ячейки при инициализации приложения не равно days_in_month, то поменять ее на days_in_month.
 
         Args:

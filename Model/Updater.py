@@ -2,20 +2,43 @@ from Addons.QOL import QOL
 
 
 class Updater:
-    """
-    Класс для обновления данных в таблице заработной платы и торговых точек.
+    """    
+    Updater class provides methods to update employee shift information and income data in a Google Sheets document.
+       **Methods**:
 
-    Этот класс предоставляет методы для автоматического обновления информации о 
-    сменах сотрудников, их местоположении во время смен, а также доходах торговых точек.
+            update_info_WAGES(employee_shift_dict: dict, sheetLink) -> None:
+                    Updates employee shift information in the wages table.
 
-    Методы:
-    ________
-        - update_info_WAGES: Обновляет информацию о сменах сотрудников в таблице заработной платы.
-        - update_info_everyday: Обновляет данные о сменах сотрудников за каждый день месяца.
-        - update_info_everyday_TRADEPLACES: Обновляет данные о сменах сотрудников по торговым точкам.
-        - update_table_from_lists: Обновляет таблицу с доходами торговых точек на основе переданных данных.
+                    employee_shift_dict (dict): Dictionary containing employee shift information.
+                    sheetLink (object): Google Sheets link object to interact with.
 
-    Все методы используют пакетное обновление для оптимизации работы с таблицами.
+            update_info_everyday(days_in_month: int, employee_shiftsList: list, sheetLink) -> None:
+                Updates employee shift information in the wages table for each day of the month.
+
+                    days_in_month (int): Number of days in the month.
+                    employee_shiftsList (list): List of employee shifts by day.
+                    sheetLink (object): Google Sheets link object to interact with.
+
+
+            update_info_everyday_TRADEPLACES(days_in_month: int, employee_shiftsList: list, sheetLink) -> None:
+                Updates employee shift information by trade places (arenas) for each day of the selected month.
+
+                    days_in_month (int): Number of days in the month.
+                    employee_shiftsList (list): List of employee shifts with trade places.
+                    sheetLink (object): Google Sheets link object to interact with.
+
+
+            update_table_from_lists(sheetLink, *lists) -> None:
+
+                    sheetLink (object): Google Sheets link object to interact with.
+
+
+            send_emp_list(emp_list: list, sheetlink) -> None:
+                Replaces the employee list in the Google Sheets document.
+
+                    emp_list (list): List of employees from EMP_creator.
+                    sheetlink (object): Google Sheets link object to interact with.
+
     """
 
     def update_info_WAGES(employee_shift_dict: dict, sheetLink) -> None:

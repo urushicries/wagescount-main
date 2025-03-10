@@ -5,24 +5,22 @@ from Addons.QOL import QOL
 
 class Parser:
     """
-    Класс предназначен для переноса информации из одного места в другое. 
-    Он включает несколько методов для работы с различными источниками данных.
+    Parser class for transferring information from one place to another.
+    It includes several methods for working with various data sources.
 
-    Методы:
-    --------
-    data_about_shifts:
-        Извлекает данные из таблиц отчетов по общему количеству смен сотрудников.
-        Поддерживаемые листы: KOM, PIK, JUNE, LONDONMALL.
+    Methods:
+        parseDataAboutShifts(pattern: int, *sheets) -> tuple | None:
+            Extracts data from report tables on the total number of employee shifts.
+            Supported sheets: KOM, PIK, JUNE, LONDONMALL.
 
-    info_about_income:
-        Извлекает данные из таблиц отчетов по общему доходу за каждую смену на каждой арене.
+        parseInfoAboutIncome(client, spreadsheet_id: str, sheet_name: str) -> list:
+            Finds cells containing numerical (financial) values in Google Sheets and returns a list of tuples (row_index, cell_value).
 
-    income_from_sheets:
-        Находит ячейки, содержащие числовые (финансовые) значения в Google Sheets,
-        и возвращает список кортежей (row_index, cell_value).
+        parseINCOMEfromSHEETS(client: object, month: str, *sheet_ids: tuple) -> tuple[list, list, list, list]:
+            Extracts income data from the provided sheets.
 
-    income_from_sheets_v2:
-        Извлекает данные о доходах из переданных листов.
+        parseDataNamesShift(*datasets: tuple) -> list:
+            Parses employee shifts from multiple datasets.
     """
     def parseDataAboutShifts(pattern: int, *sheets) -> tuple | None:
         """data for different time\nsheets: KOM | PIK | JUNE | LONDONMALL"""

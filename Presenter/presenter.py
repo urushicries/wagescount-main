@@ -1,6 +1,31 @@
 # presenter.py
 
 class WebPresenter:
+    """A class used to represent a Web Presenter that handles data processing and updates for various sheets.
+
+    Attributes:
+        view: The view component to interact with the user interface.
+        client: The client used to interact with the sheets.
+        QOL: Quality of Life utilities for various operations.
+        Parser: The parser used to parse data from sheets.
+        Updater: The updater used to update data in sheets.
+        infoVariables: Additional information variables.
+        service: The service used for sheet operations.
+        sheetWAGES: The sheet where wages data is stored.
+        shtKOM_id: The ID of the KOM sheet.
+        shtPIK_id: The ID of the PIK sheet.
+        shtJUN_id: The ID of the JUN sheet.
+        shtLM_id: The ID of the LM sheet.
+        days_in_month: The number of days in the current month.
+
+    Methods:
+        send_request(month, checkboxes, days_in_month):
+            Sends a request to process data for a given month based on selected options.
+        
+        sentRdelete():
+        
+        toggle_RP_button(days_in_month):"""
+    
     def __init__(self, view, client, QOL, Parser, Updater, infoVariables,
                  service, sheetWAGES, shtKOM_id, shtPIK_id, shtJUN_id, shtLM_id):
 
@@ -20,12 +45,33 @@ class WebPresenter:
 
 
     def send_request(self, month, checkboxes, days_in_month):
-        """
-        checkboxes – словарь с булевыми значениями для ключей:
-          'wages' – для всей зарплаты,
-          'income' – для дохода из арен,
-          'shifts' – для смен за каждый день.
-        """
+        """Sends a request to process data for a given month based on selected options.
+
+        Args:
+            month (str): The month for which data is to be processed.
+            checkboxes (dict): A dictionary with boolean values indicating which data to process:
+                - 'wages': Process wages data.
+                - 'income': Process income data from rents.
+                - 'shifts': Process shifts data for each day.
+            days_in_month (int): The number of days in the specified month.
+
+        Returns:
+            None
+
+        Raises:
+            Exception: If an error occurs while processing the sheets.
+
+        The function performs the following steps:
+            1. Checks if at least one option is selected in the checkboxes.
+            2. Retrieves the data for the specified month.
+            3. Opens the relevant sheets for the specified month.
+            4. Parses data about shifts if 'wages' or 'shifts' is selected.
+            5. Parses income data if 'income' is selected.
+            6. Updates wages information if 'wages' is selected.
+            7. Updates shifts information if 'shifts' is selected.
+            8. Updates income information if 'income' is selected.
+            9. Notifies the view of success or failure."""
+
         # Если ни одна функция не выбрана, сообщаем об ошибке через View
         if not (checkboxes.get('wages') or checkboxes.get('income') or checkboxes.get('shifts')):
             self.view.nothing_picked()
@@ -103,8 +149,26 @@ class WebPresenter:
             self.view.show_error("Problem with ", str(e))
 
     def sentRdelete(self):
+        """
+        Deletes the specified ranges from the wages list.
+
+        This method clears the ranges in the wages list identified by the given
+        service and spreadsheet ID.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
         self.QOL.clear_wgslist_ranges(
             self.service, "14FtsvGplg1jKXJvLJCueI8iEEnjJUtjk17NuPqeCnqo")
 
     def toggle_RP_button(self, days_in_month):
+        """
+        Toggles the RP button for the given number of days in a month.
+
+        Args:
+            days_in_month (int): The number of days in the current month.
+        """
         self.QOL.toggle_cell_value(self.sheetWAGES, days_in_month)
