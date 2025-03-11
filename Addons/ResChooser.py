@@ -8,7 +8,8 @@ class ResChooser:
         """Создает окно выбора разрешения."""
         self.main_window_res = "1680x850"  # Значение по умолчанию
         self.RESOLUTIONS = {"small": "1450x720",
-                            "medium": "1560x900", "big": "1680x1050"}
+                            "medium": "1560x900",
+                              "big": "1680x850"}
 
         self.root = tk.Toplevel(parent) if parent else tk.Tk()
         self.root.resizable(0, 0)
