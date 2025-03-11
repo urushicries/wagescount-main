@@ -24,7 +24,7 @@ from Addons.VARIABLES_WC import Variables_WC # Модуль с информац�
 from Addons.QOL import QOL # Модуль с методами для упрощения жизни
 
 if __name__ == "__main__":
-
+    ui = None
     OptimizedWindows.optForWindowSize()
     bundle_dir = OptimizedWindows.optIfAppIsCompiled()
 
@@ -67,6 +67,8 @@ if __name__ == "__main__":
     dataJUNE = Variables_WC.dataJUNE
     dataLM = Variables_WC.dataLM
 
+
+
     QOL.ensure_cell_value(sheetWAGES,31)
     #Вызываю набор списка работников
     empCRTR = EMP_list_creator()
@@ -88,13 +90,24 @@ if __name__ == "__main__":
         screen_width, screen_height, width, height)
     root.geometry(f"{window_width}x{window_height}+{position_x}+{position_y}")
 
-    # Создаём экземпляр View
-    ui = UiManager(root, QOL, Variables_WC, scale_factor)
+    config = {
+        'root': root,
+        'view': ui,
+        'client': client,
+        'QOL': QOL,
+        'Parser': Parser,
+        'Updater': Updater,
+        'infoVariables': Variables_WC,
+        'service': service,
+        'sheetWAGES': sheetWAGES,
+        'shtKOM_id': shtKOM_id,
+        'shtPIK_id': shtPIK_id,
+        'shtJUN_id': shtJUN_id,
+        'shtLM_id': shtLM_id,
+    }
+    
+    ui = UiManager(config, scale_factor)
+    presenter = WebPresenter(config)
 
-    # Создаем Presenter, передавая в него все необходимые зависимости и ссылку на View
-    presenter = WebPresenter(ui, client, QOL, Parser, Updater, Variables_WC,
-                             service, sheetWAGES, shtKOM_id, shtPIK_id, shtJUN_id, shtLM_id)
-
-    # Передаем Presenter в View
     ui.presenter = presenter
     ui.run()

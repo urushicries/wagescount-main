@@ -27,7 +27,7 @@ class UiManager:
     """
 
 
-    def __init__(self, root, QOL, infoVariables, scale_factor=1):
+    def __init__(self, config, scale_factor=1):
         # инициализация объектов переменных для объектов интерфейса
         self.label_success_info = None
         self.label_error_info = None
@@ -44,9 +44,9 @@ class UiManager:
         self.label_instructions = None
         self.label_period_info = None
 
-        self.root = root
-        self.QOL = QOL
-        self.infoVariables = infoVariables
+        self.root = config['root']
+        self.QOL = config['QOL']
+        self.infoVariables = config['infoVariables']
         self.scale_factor = scale_factor
         self.days_in_month = 31  # значение периода по умолчанию
 

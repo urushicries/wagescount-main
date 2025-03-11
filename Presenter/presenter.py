@@ -26,21 +26,19 @@ class WebPresenter:
         
         toggle_RP_button(days_in_month):"""
     
-    def __init__(self, view, client, QOL, Parser, Updater, infoVariables,
-                 service, sheetWAGES, shtKOM_id, shtPIK_id, shtJUN_id, shtLM_id):
-
-        self.view = view
-        self.client = client
-        self.QOL = QOL
-        self.Parser = Parser
-        self.Updater = Updater
-        self.infoVariables = infoVariables
-        self.service = service
-        self.sheetWAGES = sheetWAGES
-        self.shtKOM_id = shtKOM_id
-        self.shtPIK_id = shtPIK_id
-        self.shtJUN_id = shtJUN_id
-        self.shtLM_id = shtLM_id
+    def __init__(self, config):
+        self.view = config['view']
+        self.client = config['client']
+        self.QOL = config['QOL']
+        self.Parser = config['Parser']
+        self.Updater = config['Updater']
+        self.infoVariables = config['infoVariables']
+        self.service = config['service']
+        self.sheetWAGES = config['sheetWAGES']
+        self.shtKOM_id = config['shtKOM_id']
+        self.shtPIK_id = config['shtPIK_id']
+        self.shtJUN_id = config['shtJUN_id']
+        self.shtLM_id = config['shtLM_id']
         self.days_in_month = 31
 
 
