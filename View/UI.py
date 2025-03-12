@@ -246,13 +246,22 @@ class UiManager:
         self.delete_button.grid(
             row=7, column=3, pady=int(30 * self.scale_factor))
 
+        # язык
+        self.language_button = tk.Button(
+            self.root,
+            text="Switch Language 🌐",
+            font=("Roboto", int(20 * self.scale_factor)),
+            bg="white", fg="black",
+            command=self.toggle_language
+        )
+        self.language_button.grid(row=9, column=3, pady=int(30 * self.scale_factor))
 
         #CHECK BOXES
 
         # Переключатель смены за весь РП
         self.t_wages_whole_month_check = tk.Checkbutton(
             self.root,
-            text="All shifts for period?",
+            text=self.infoVariables.allshifts,
             variable=self.t_wages_whole_month_var1,
             bg="white", fg="black",
             font=("Roboto", int(24 * self.scale_factor), "bold")
@@ -274,7 +283,7 @@ class UiManager:
         # Переключатель смены на все дни
         self.t_set_up_shifts_for_all_days_check = tk.Checkbutton(
             self.root,
-            text="Shifts for every day?",
+            text=self.infoVariables.infoAboutShiftEveryday,
             variable=self.t_set_up_shifts_for_all_days_var3,
             bg="white", fg="black",
             font=("Roboto", int(24 * self.scale_factor), "bold")
@@ -321,7 +330,7 @@ class UiManager:
             bg="black", fg="white"
         )
         self.label_wages_info.grid(
-            row=8, column=1, pady=int(20 * self.scale_factor))
+            row=8, column=0, pady=int(20 * self.scale_factor))
 
         # Надпись инфа про приходную функцию
         self.label_income_info = tk.Label(
@@ -331,9 +340,9 @@ class UiManager:
             bg="black", fg="white"
         )
         self.label_income_info.grid(
-            row=8, column=0, pady=int(20 * self.scale_factor))
+            row=8, column=2, pady=int(20 * self.scale_factor))
 
-        # Надпись внизу
+        # Надпись версии
         self.label_footer_info = tk.Label(
             self.root,
             text="would i lose?\nnah i'd win\nver 0.1.8",
@@ -350,7 +359,7 @@ class UiManager:
             bg="black", fg="white"
         )
         self.label_daily_info.grid(
-            row=8, column=2, pady=int(18 * self.scale_factor))
+            row=8, column=1, pady=int(18 * self.scale_factor))
 
         # Надпись ошибка
         self.label_error_info = tk.Label(
@@ -369,6 +378,23 @@ class UiManager:
             font=("Arial", int(15 * self.scale_factor))
         )
         self.label_success_info.grid(row=6, column=3)
+
+
+    def toggle_language(self):
+        self.infoVariables.switch_language()
+        self.update_ui_texts()
+
+    def update_ui_texts(self):
+        self.label_instructions.config(text=self.infoVariables.infoAboutPeriodsAndbuttons)
+        self.labelDeleteInfo.config(text=self.infoVariables.infoAboutDeleteButton)
+        self.label_wages_info.config(text=self.infoVariables.infoaboutWagesFunc)
+        self.label_income_info.config(text=self.infoVariables.infoaboutIncomeFunc)
+        self.label_daily_info.config(text=self.infoVariables.infoAboutShiftEverydayFunc)
+        self.t_set_up_shifts_for_all_days_check.config(text=self.infoVariables.infoAboutShiftEveryday)
+        self.t_income_from_shops_check.config(text=self.infoVariables.income_from_shopsINFO)
+        self.t_wages_whole_month_check.config(text=self.infoVariables.allshifts)
+        for i, month in enumerate(self.infoVariables.months):
+            self.root.grid_slaves(row=i // 4, column=i % 4)[0].config(text=month)
 
     def run(self):
         self.root.mainloop()

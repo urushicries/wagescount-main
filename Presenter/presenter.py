@@ -74,24 +74,25 @@ class WebPresenter:
         if not (checkboxes.get('wages') or checkboxes.get('income') or checkboxes.get('shifts')):
             self.view.nothing_picked()
             return
-
+        
         months_data = {
-            "Январь ❄️": {"sheet_suffix": "Январь25", "days": days_in_month},
-            "Февраль 🌨️": {"sheet_suffix": "Февраль25", "days": days_in_month},
-            "Март 🌸": {"sheet_suffix": "Март25", "days": days_in_month},
-            "Апрель 🌹": {"sheet_suffix": "Апрель25", "days": days_in_month},
-            "Май 🌺": {"sheet_suffix": "Май25", "days": days_in_month},
-            "Июнь ☀️": {"sheet_suffix": "Июнь25", "days": days_in_month},
-            "Июль 🌞": {"sheet_suffix": "Июль25", "days": days_in_month},
-            "Август 😢": {"sheet_suffix": "Август25", "days": days_in_month},
-            "Сентябрь 😭": {"sheet_suffix": "Сентябрь25", "days": days_in_month},
-            "Октябрь🍁 ": {"sheet_suffix": "Октябрь25", "days": days_in_month},
-            "Ноябрь 🍂": {"sheet_suffix": "Ноябрь25", "days": days_in_month},
-            "Декабрь ☃️": {"sheet_suffix": "Декабрь25", "days": days_in_month}
-        }
-
-
+                "Январь ❄️": {"sheet_suffix": "Январь25", "days": days_in_month},
+                "Февраль 🌨️": {"sheet_suffix": "Февраль25", "days": days_in_month},
+                "Март 🌸": {"sheet_suffix": "Март25", "days": days_in_month},
+                "Апрель 🌹": {"sheet_suffix": "Апрель25", "days": days_in_month},
+                "Май 🌺": {"sheet_suffix": "Май25", "days": days_in_month},
+                "Июнь ☀️": {"sheet_suffix": "Июнь25", "days": days_in_month},
+                "Июль 🌞": {"sheet_suffix": "Июль25", "days": days_in_month},
+                "Август 😢": {"sheet_suffix": "Август25", "days": days_in_month},
+                "Сентябрь 😭": {"sheet_suffix": "Сентябрь25", "days": days_in_month},
+                "Октябрь 🍁": {"sheet_suffix": "Октябрь25", "days": days_in_month},
+                "Ноябрь 🍂": {"sheet_suffix": "Ноябрь25", "days": days_in_month},
+                "Декабрь ☃️": {"sheet_suffix": "Декабрь25", "days": days_in_month}
+            }
+        
+        print(month)
         month_data = months_data.get(month)
+        print(month_data)
         if not month_data:
             print(f"Unknown month: {month}")
             return
