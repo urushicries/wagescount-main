@@ -2,7 +2,25 @@ import tkinter as tk
 
 
 class ResChooser:
-    """Диалоговое окно выбора разрешения."""
+    """
+    A class to create a resolution chooser window using Tkinter.
+
+    Attributes
+    ----------
+    main_window_res : str
+        The default resolution for the main window.
+    RESOLUTIONS : dict
+        A dictionary containing resolution options.
+
+    Methods
+    -------
+    __init__(parent=None)
+        Initializes the ResChooser window with resolution options.
+    choose_resolution()
+        Selects a resolution from the list and closes the window.
+    get_resolution()
+        Starts the window main loop and returns the selected resolution.
+    """
 
     def __init__(self, parent=None):
         """Создает окно выбора разрешения."""

@@ -92,7 +92,6 @@ if __name__ == "__main__":
 
     config = {
         'root': root,
-        'view': ui,
         'client': client,
         'QOL': QOL,
         'Parser': Parser,
@@ -104,9 +103,12 @@ if __name__ == "__main__":
         'shtPIK_id': shtPIK_id,
         'shtJUN_id': shtJUN_id,
         'shtLM_id': shtLM_id,
+        'view': None
     }
-    
+        
     ui = UiManager(config, scale_factor)
+    config['view'] = ui
+
     presenter = WebPresenter(config)
 
     ui.presenter = presenter
