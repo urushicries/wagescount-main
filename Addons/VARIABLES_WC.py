@@ -35,12 +35,14 @@ class Variables_WC:
             'infoaboutShiftEveryday':"Shifts for every day?",
             'infoAboutDeleteButton': "Deletes all input info from table",
             'income_from_shopsINFO': "Count income from shops?",
-            'months': [
-                "Январь ❄️", "Февраль 🌨️", "Март 🌸", "Апрель 🌹", "Май 🌺", "Июнь ☀️",
-                "Июль 🌞", "Август 😢", "Сентябрь 😭", "Октябрь🍁 ", "Ноябрь 🍂", "Декабрь ☃️"
-            ]
+              'months': [
+                "January ❄️", "February 🌨️", "March 🌸", "April 🌹", "May 🌺", "June ☀️",
+                "July 🌞", "August 😢", "September 😭", "October🍁 ", "November 🍂", "December ☃️"
+            ],
+            'change':"Change period?🌗",
         },
         'en': {
+            'change':"Сменить период?🌗",
             'allshifts':"Сумма смен за РП?",
             'infoAboutPeriodsAndbuttons': (
                 "Выберите период расчета и соответствующую функцию. \n"
@@ -60,11 +62,12 @@ class Variables_WC:
                 "Рассчитывает ежедневную зарплату\n отслеживает местоположение работника,\n и назначает смены по дням."
             ),
             'infoAboutDeleteButton': "Удаляет всю введенную \nинформацию из таблицы",
-            'income_from_shopsINFO': "Доходы из магазинов?",
-            'months': [
-                "January ❄️", "February 🌨️", "March 🌸", "April 🌹", "May 🌺", "June ☀️",
-                "July 🌞", "August 😢", "September 😭", "October🍁 ", "November 🍂", "December ☃️"
+            'income_from_shopsINFO': "Доходы из магазинов?",      
+                'months': [
+                "Январь ❄️", "Февраль 🌨️", "Март 🌸", "Апрель 🌹", "Май 🌺", "Июнь ☀️",
+                "Июль 🌞", "Август 😢", "Сентябрь 😭", "Октябрь🍁 ", "Ноябрь 🍂", "Декабрь ☃️"
             ]
+
         }
     }
 
@@ -88,6 +91,7 @@ class Variables_WC:
         cls.income_from_shopsINFO = cls.texts[lang]['income_from_shopsINFO']
         cls.allshifts = cls.texts[lang]['allshifts']
         cls.months = cls.texts[lang]['months']
+        cls.change = cls.texts[lang]['change']
 
     # data variables for computations
     days_in_month = 31

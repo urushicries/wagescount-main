@@ -140,13 +140,13 @@ class UiManager:
             self.days_in_month = 31
             self.presenter.toggle_RP_button(self.days_in_month)
             self.label_period_info.config(
-                text=f"Count from {self.days_in_month - 15}    to:    {self.days_in_month}")
+                text=f"{self.days_in_month - 15}    -    {self.days_in_month}")
             print("Поменял РП с \"1 до 15\" на \"16 до 31\"")
         else:
             self.days_in_month = 15
             self.presenter.toggle_RP_button(self.days_in_month)
             self.label_period_info.config(
-                text=f"Count from {self.days_in_month - 14}    to:    {self.days_in_month}")
+                text=f" {self.days_in_month - 14}    -    {self.days_in_month}")
             print("Поменял РП с \"16 до 31\" на \"1 до 15\" ")
 
     def delete_ranges(self):
@@ -227,7 +227,7 @@ class UiManager:
         # Переключить РП
         self.toggle_button = tk.Button(
             self.root,
-            text="Change period?🌗",
+            text=self.infoVariables.change,
             font=("Roboto", int(30 * self.scale_factor)),
             bg="white", fg="black", padx=btn_width//2,
             command=self.toggle_days
@@ -238,7 +238,7 @@ class UiManager:
         # Кнопка удалить все?
         self.delete_button = tk.Button(
             self.root,
-            text="Clear everything up? 🗑️",
+            text=" 🗑️ ? ",
             font=("Roboto", int(20 * self.scale_factor)),
             bg="white", fg="black",
             command=self.delete_ranges
@@ -249,7 +249,7 @@ class UiManager:
         # язык
         self.language_button = tk.Button(
             self.root,
-            text="Switch Language 🌐",
+            text="LANG 🌐 / ЯЗЫК 🌐",
             font=("Roboto", int(20 * self.scale_factor)),
             bg="white", fg="black",
             command=self.toggle_language
@@ -297,7 +297,7 @@ class UiManager:
         # Надпись инфа про период
         self.label_period_info = tk.Label(
             self.root,
-            text=f"Count from {self.days_in_month - 15}    to:    {self.days_in_month}",
+            text=f"{self.days_in_month - 15}    -    {self.days_in_month}",
             font=("Roboto", int(25 * self.scale_factor), "bold"),
             bg="black", fg="white"
         )
@@ -345,7 +345,7 @@ class UiManager:
         # Надпись версии
         self.label_footer_info = tk.Label(
             self.root,
-            text="would i lose?\nnah i'd win\nver 0.1.8",
+            text="i'm just\nplaying my part\nver 0.2.0",
             bg="black", fg="white",
             font=("Arial", int(14 * self.scale_factor), "bold")
         )
@@ -393,6 +393,7 @@ class UiManager:
         self.t_set_up_shifts_for_all_days_check.config(text=self.infoVariables.infoAboutShiftEveryday)
         self.t_income_from_shops_check.config(text=self.infoVariables.income_from_shopsINFO)
         self.t_wages_whole_month_check.config(text=self.infoVariables.allshifts)
+        self.toggle_button.config(text=self.infoVariables.change)
         for i, month in enumerate(self.infoVariables.months):
             self.root.grid_slaves(row=i // 4, column=i % 4)[0].config(text=month)
 

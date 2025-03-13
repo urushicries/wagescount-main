@@ -84,7 +84,7 @@ if __name__ == "__main__":
 
     root = tk.Tk()
     root.resizable(False, False)
-    root.title("shifts and income AW")
+    root.title("AW")
 
     window_width, window_height, position_x, position_y, scale_factor = OptimizedWindows.adjust_window_size(
         screen_width, screen_height, width, height)
