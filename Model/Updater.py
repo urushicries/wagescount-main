@@ -195,7 +195,7 @@ class Updater:
             lists (list): A list of four lists, each containing tuples with (day_index, value).
             sheetLink: Google Sheets link object to interact with.
         """
-        incomeLSTKOM, incomeLSTPIK, incomeLSTJUNE, incomeLSTLM = lists
+        incomeLSTKOM,NPKOM, incomeLSTPIK,NPPIK, incomeLSTJUNE,JUNENP, incomeLSTLM,LMNP = lists
         fullincomeList = [incomeLSTKOM,
                           incomeLSTPIK, incomeLSTJUNE, incomeLSTLM]
         # Define the starting row and columns for the range
@@ -217,8 +217,12 @@ class Updater:
                 updates.append({"range": cell_address, "values": [[value]]})
                 print(f"В список обновлений добавлено {value} из списка {i}")
         # Perform batch update on the sheet
-
+        updates.append({'range': 'Q58', 'values': [[NPKOM]]})
+        updates.append({'range': 'R58', 'values': [[NPPIK]]})
+        updates.append({'range': 'S58', 'values': [[JUNENP]]})
+        updates.append({'range': 'T58', 'values': [[LMNP]]})
         if updates:
+            print("Updates to be sent:",updates)
             sheetLink.batch_update(updates)
 
     @staticmethod

@@ -10,11 +10,11 @@ class Variables_WC:
     """
     
     # Language attribute
-    current_language = 'ru'
+    current_language = 'en'
 
     # Texts in different languages
     texts = {
-        'ru': {
+        'en': {
             'allshifts':"All shifts for period?",
             'infoAboutPeriodsAndbuttons': (
                 "Select the calculation period and the corresponding function. \n"
@@ -41,7 +41,7 @@ class Variables_WC:
             ],
             'change':"Change period?🌗",
         },
-        'en': {
+        'ru': {
             'change':"Сменить период?🌗",
             'allshifts':"Сумма смен за РП?",
             'infoAboutPeriodsAndbuttons': (
@@ -75,7 +75,6 @@ class Variables_WC:
     @classmethod
     def switch_language(cls):
         cls.current_language = 'en' if cls.current_language == 'ru' else 'ru'
-        print(cls.current_language)
         cls.update_texts()
 
     # Method to update texts based on current language

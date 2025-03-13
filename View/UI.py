@@ -93,15 +93,9 @@ class UiManager:
         self.root.after(3000, lambda: self.label_success_info.config(text=""))
 
     def show_error(self, message):
-        """
-        Displays an error message on the UI for a short duration.
-
-        Args:
-            message (str): The error message to be displayed.
-        """
-        self.label_error_info.config(text=message, font=("Arial", 30, "bold"))
-        self.root.after(3000, lambda: self.label_error_info.config(text=""))
-
+        # Adjust the method to accept only one argument
+        print(f"Error: {message}")
+        
     # Обработчик нажатия кнопки месяца – делегирует вызов презентеру
     def on_button_click(self, month):
         """

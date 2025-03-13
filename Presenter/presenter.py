@@ -76,21 +76,21 @@ class WebPresenter:
             return
         
         months_data = {
-                "Январь ❄️": {"sheet_suffix": "Январь25", "days": days_in_month},
-                "Февраль 🌨️": {"sheet_suffix": "Февраль25", "days": days_in_month},
-                "Март 🌸": {"sheet_suffix": "Март25", "days": days_in_month},
-                "Апрель 🌹": {"sheet_suffix": "Апрель25", "days": days_in_month},
-                "Май 🌺": {"sheet_suffix": "Май25", "days": days_in_month},
-                "Июнь ☀️": {"sheet_suffix": "Июнь25", "days": days_in_month},
-                "Июль 🌞": {"sheet_suffix": "Июль25", "days": days_in_month},
-                "Август 😢": {"sheet_suffix": "Август25", "days": days_in_month},
-                "Сентябрь 😭": {"sheet_suffix": "Сентябрь25", "days": days_in_month},
-                "Октябрь 🍁": {"sheet_suffix": "Октябрь25", "days": days_in_month},
-                "Ноябрь 🍂": {"sheet_suffix": "Ноябрь25", "days": days_in_month},
-                "Декабрь ☃️": {"sheet_suffix": "Декабрь25", "days": days_in_month}
+            "January ❄️": {"sheet_suffix": "Январь25", "days": days_in_month},
+            "February 🌨️": {"sheet_suffix": "Февраль25", "days": days_in_month},
+            "March 🌸": {"sheet_suffix": "Март25", "days": days_in_month},
+            "April 🌹": {"sheet_suffix": "Апрель25", "days": days_in_month},
+            "May 🌺": {"sheet_suffix": "Май25", "days": days_in_month},
+            "June ☀️": {"sheet_suffix": "Июнь25", "days": days_in_month},
+            "July 🌞": {"sheet_suffix": "Июль25", "days": days_in_month},
+            "August 😢": {"sheet_suffix": "Август25", "days": days_in_month},
+            "September 😭": {"sheet_suffix": "Сентябрь25", "days": days_in_month},
+            "October 🍁": {"sheet_suffix": "Октябрь25", "days": days_in_month},
+            "November 🍂": {"sheet_suffix": "Ноябрь25", "days": days_in_month},
+            "December ☃️": {"sheet_suffix": "Декабрь25", "days": days_in_month}
             }
         
-        print(month)
+        print(month, self.infoVariables.current_language)
         month_data = months_data.get(month)
         print(month_data)
         if not month_data:
@@ -119,10 +119,11 @@ class WebPresenter:
                 dictEMPSHIFT = self.QOL.makeDictEmpTot(emp_shiftLST)
 
             if checkboxes.get('income'):
-                incomeKOM, incomePIK, incomeJUNE, incomeLM = self.Parser.parseINCOMEfromSHEETS(
+                incomeKOM, NPKOM, incomePIK, NPPIK, incomeJUNE, NPJUN, incomeLM, NPLM = self.Parser.parseINCOMEfromSHEETS(
                     self.client, month_data["sheet_suffix"],
                     self.shtKOM_id, self.shtPIK_id, self.shtJUN_id, self.shtLM_id
                 )
+            print("Income data:", incomeKOM, NPKOM, incomePIK, NPPIK, incomeJUNE, NPJUN, incomeLM, NPLM)
 
             if checkboxes.get('wages'):
                 if dictEMPSHIFT and emp_shiftLST:
@@ -139,13 +140,13 @@ class WebPresenter:
             if checkboxes.get('income'):
                 if incomeKOM and incomePIK and incomeJUNE and incomeLM:
                     self.Updater.update_table_from_lists(
-                        self.sheetWAGES, incomeKOM, incomePIK, incomeJUNE, incomeLM)
+                        self.sheetWAGES, incomeKOM, NPKOM, incomePIK, NPPIK, incomeJUNE, NPJUN, incomeLM, NPLM)
 
             # Если всё прошло успешно – уведомляем View
             self.view.success()
         except Exception as e:
             print(f"Error occurred while processing sheets for {month}: {e}")
-            self.view.show_error("Problem with ", str(e))
+            self.view.show_error(str(e))
 
     def sentRdelete(self):
         """

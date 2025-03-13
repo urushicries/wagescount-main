@@ -82,18 +82,21 @@ class Parser:
 
         print("Успешно подключился к таблице")
         cells_with_money_type = []
+        cells_with_money_type_NP = []
 
         try:
             # Получаем значения 10-го столбца (столбец J)
-            all_values = sheet.col_values(10)
+            all_values_inc = sheet.col_values(10)
+            all_values_NP = sheet.col_values(8)
         except Exception as e:
             print(f"Произошла ошибка при получении данных с листа: {e}")
             return None
 
-        print(all_values)
+        print(all_values_inc)
+        print(all_values_NP)
         day_idx = 0
         # Перебираем каждое значение ячейки (номер строки начинается с 1)
-        for row_index, cell_value in enumerate(all_values, start=1):
+        for row_index, cell_value in enumerate(all_values_inc, start=1):
 
             if QOL.is_valid_price(cell_value):
                 # Заменяем запятую на точку и удаляем неразрывный пробел
@@ -106,9 +109,26 @@ class Parser:
                     # Если преобразование не удалось, пропускаем значение
                     continue
                 cells_with_money_type.append((day_idx, numeric_value))
-                print(f"adding this thing to income table - {cleaned_value}")
-        print("вот список из f_c_b_t_c", cells_with_money_type)
-        return cells_with_money_type
+
+        for row_index, cell_value in enumerate(all_values_NP, start=1):
+
+            if QOL.is_valid_price(cell_value):
+                # Заменяем запятую на точку и удаляем неразрывный пробел
+                cleaned_value = cell_value.replace(
+                    ",", ".").replace("\xa0", "")
+                day_idx += 1
+                try:
+                    numeric_value = float(cleaned_value)
+                except ValueError:
+                    # Если преобразование не удалось, пропускаем значение
+                    continue
+                cells_with_money_type_NP.append((day_idx, numeric_value))
+
+        total_income_NP = sum(value for _, value in cells_with_money_type_NP)
+
+        print(f"Total income NP: {total_income_NP}")
+
+        return cells_with_money_type, total_income_NP  
 
     def parseINCOMEfromSHEETS(client: object, month: str, *sheet_ids: tuple) -> tuple[list, list, list, list]:
         """
@@ -123,20 +143,19 @@ class Parser:
             tuple: Четыре значения доходов - KOM, PIK, JUNE, LM.
         """
         sheetKOM, sheetPIK, sheetJUNE, sheetLM = sheet_ids
-
         print("INFORMATION ABOUT income IN KOMENDA")
-        list_with_income_KOM = Parser.parseInfoAboutIncome(
+        list_with_income_KOM, KOM_NP = Parser.parseInfoAboutIncome(
             client, sheetKOM, month)
         print("INFORMATION ABOUT income IN PIK")
-        list_with_income_PIK = Parser.parseInfoAboutIncome(
+        list_with_income_PIK, PIK_NP = Parser.parseInfoAboutIncome(
             client, sheetPIK, month)
         print("INFORMATION ABOUT income IN JUNE")
-        list_with_income_JUNE = Parser.parseInfoAboutIncome(
+        list_with_income_JUNE, JUNE_NP = Parser.parseInfoAboutIncome(
             client, sheetJUNE, month)
         print("INFORMATION ABOUT income IN LM")
-        list_with_income_LM = Parser.parseInfoAboutIncome(
+        list_with_income_LM, LM_NP = Parser.parseInfoAboutIncome(
             client, sheetLM, month)
-        return list_with_income_KOM, list_with_income_PIK, list_with_income_JUNE, list_with_income_LM
+        return list_with_income_KOM, KOM_NP, list_with_income_PIK, PIK_NP, list_with_income_JUNE, JUNE_NP, list_with_income_LM, LM_NP
 
     def parseDataNamesShift(*datasets: tuple) -> list:
         """
