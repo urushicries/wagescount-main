@@ -1,4 +1,3 @@
-# presenter.py
 
 class WebPresenter:
     """A class used to represent a Web Presenter that handles data processing and updates for various sheets.

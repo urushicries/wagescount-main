@@ -121,7 +121,7 @@ class QOL:
         ranges = [
             "WGSlist!D21:P51",
             "WGSlist!D97:D111",
-            "WGSlist!Q21:T51",
+            "WGSlist!AA21:AD51",
             "WGSlist!D59:P89"
         ]
 

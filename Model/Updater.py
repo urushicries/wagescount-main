@@ -200,7 +200,7 @@ class Updater:
                           incomeLSTPIK, incomeLSTJUNE, incomeLSTLM]
         # Define the starting row and columns for the range
         start_row = 21
-        columns = ['Q', 'R', 'S', 'T']  # Corresponding columns for each list
+        columns = ['AA', 'AB', 'AC', 'AD']  # Corresponding columns for each list
 
         # Prepare batch updates
         updates = []
@@ -217,10 +217,10 @@ class Updater:
                 updates.append({"range": cell_address, "values": [[value]]})
                 print(f"В список обновлений добавлено {value} из списка {i}")
         # Perform batch update on the sheet
-        updates.append({'range': 'Q58', 'values': [[NPKOM]]})
-        updates.append({'range': 'R58', 'values': [[NPPIK]]})
-        updates.append({'range': 'S58', 'values': [[JUNENP]]})
-        updates.append({'range': 'T58', 'values': [[LMNP]]})
+        updates.append({'range': 'AA58', 'values': [[NPKOM]]})
+        updates.append({'range': 'AB58', 'values': [[NPPIK]]})
+        updates.append({'range': 'AC58', 'values': [[JUNENP]]})
+        updates.append({'range': 'AD58', 'values': [[LMNP]]})
         if updates:
             print("Updates to be sent:",updates)
             sheetLink.batch_update(updates)
