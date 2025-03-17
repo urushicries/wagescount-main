@@ -16,7 +16,7 @@ class EMP_list_creator:
         position_x = (screen_width - 300) // 2
         position_y = (screen_height - 300) // 2
 
-        self.root.geometry(f'250x540+{position_x}+{position_y}')
+        self.root.geometry(f'350x540+{position_x}+{position_y}')
 
         self.root.grid_rowconfigure(0, weight=1)
         self.root.grid_rowconfigure(1, weight=1)
@@ -24,7 +24,7 @@ class EMP_list_creator:
         self.root.grid_columnconfigure(1, weight=1)
 
         self.label = tk.Label(
-            self.root, text="Enter employees (one per line):", font=("Arial", 12, "bold"))
+            self.root, text="Enter employees (one per line):\nЗапишите сотрудников (Каждый сотрудник на своей линии)\nВ случае, если менять список сотрудников не нужно,\n то просто нажмите на кнопку ниже,\n при этом не вводя имена сотрудников.", font=("Arial", 11, "bold"))
         self.label.grid(row=0, column=0)
 
 

@@ -106,6 +106,9 @@ class WebPresenter:
                 month_data["sheet_suffix"])
             sheetLM = self.client.open("Лондон отчет").worksheet(
                 month_data["sheet_suffix"])
+            # Initialize income variables with default values
+            incomeKOM = incomePIK = incomeJUNE = incomeLM = None
+            NPKOM = NPPIK = NPJUN = NPLM = None
 
             dictEMPSHIFT = None
             emp_shiftLST = None
@@ -171,3 +174,6 @@ class WebPresenter:
             days_in_month (int): The number of days in the current month.
         """
         self.QOL.toggle_cell_value(self.sheetWAGES, days_in_month)
+        
+    def toggleINCKey(self):
+        self.QOL.toggle_incKEY(self.sheetWAGES)

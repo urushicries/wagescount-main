@@ -25,9 +25,9 @@ class ResChooser:
     def __init__(self, parent=None):
         """Создает окно выбора разрешения."""
         self.main_window_res = "1680x850"  # Значение по умолчанию
-        self.RESOLUTIONS = {"small": "1450x720",
-                            "medium": "1560x900",
-                              "big": "1680x850"}
+        self.RESOLUTIONS = {"small | маленькое": "1450x720",
+                            "medium | среднее": "1560x900",
+                              "big | большое": "1680x850"}
 
         self.root = tk.Toplevel(parent) if parent else tk.Tk()
         self.root.resizable(0, 0)
@@ -46,7 +46,7 @@ class ResChooser:
         self.root.grid_columnconfigure(1, weight=1)
 
         self.label = tk.Label(
-            self.root, text="Choose preferred resolution:", font=("Arial", 12, "bold"))
+            self.root, text="Choose preferred resolution:\nВыберете желаемый размер окна:\n(для ноутов рекомендую маленький)", font=("Arial", 12, "bold"))
         self.label.grid(row=0, column=0)
 
         self.listbox = tk.Listbox(

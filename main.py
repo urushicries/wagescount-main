@@ -1,5 +1,6 @@
 import tkinter as tk
 import os
+import sys
 
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -17,11 +18,21 @@ from View.UI import UiManager
 from Presenter.presenter import WebPresenter
 
 # addons
-from Addons.ResChooser import ResChooser  #Выбор размер окна
-from Addons.EMP_Creator import EMP_list_creator #Создание списка или изменение списка работников при необходимости
-from Addons.OptimizedWindows import OptimizedWindows #Оптимизация под масштаб в винде(для ноутов)
-from Addons.VARIABLES_WC import Variables_WC # Модуль с информационными переменными
-from Addons.QOL import QOL # Модуль с методами для упрощения жизни
+from Addons.ResChooser import ResChooser  # Выбор размер окна
+from Addons.EMP_Creator import EMP_list_creator  # Создание списка или изменение списка работников при необходимости
+from Addons.OptimizedWindows import OptimizedWindows  # Оптимизация под масштаб в винде(для ноутов)
+from Addons.VARIABLES_WC import Variables_WC  # Модуль с информационными переменными
+from Addons.QOL import QOL  # Модуль с методами для упрощения жизни
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 if __name__ == "__main__":
     ui = None
@@ -29,7 +40,7 @@ if __name__ == "__main__":
     bundle_dir = OptimizedWindows.optIfAppIsCompiled()
 
     # Define the relative path
-    relative_path = "key.json"
+    relative_path = resource_path("key.json")
 
     # Join the paths safely
     json_path = os.path.join(bundle_dir, relative_path)

@@ -156,6 +156,27 @@ class QOL:
                 print(f"Значение ячейки E93 изменено с {current_value} на {new_value}")
         except Exception as e:
             print(f"Ошибка при обновлении ячейки: {e}")
+
+    def toggle_incKEY(sheet: object) -> None:
+        """
+        Функция принимает объект листа и меняет значение ячейки E93 на листе WGSlist:
+        если текущее значение равно "31", меняет на "15", иначе – на "31".
+
+        Args:
+            sheet(object): Объект листа (например, object), содержащий лист WGSlist.
+            days_in_month(int): ключ внутри ячейки
+        """
+        try:
+            cell = sheet.acell('AE53')
+            current_value = cell.value.strip() if cell.value else ""
+
+            newValue = "15" if current_value == "31" else "31"
+            # Обновляем значение ячейки E93
+            sheet.update_acell('AE53', newValue)
+            print(f"Значение ячейки AE53 изменено с {current_value} на {newValue}")
+        except Exception as e:
+            print(f"Ошибка при обновлении ячейки: {e}")
+
     @staticmethod
     def ensure_cell_value(sheet: object, days_in_month: int) -> None:
         """
