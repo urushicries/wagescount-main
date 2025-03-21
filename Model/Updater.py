@@ -40,7 +40,7 @@ class Updater:
                     sheetlink (object): Google Sheets link object to interact with.
 
     """
-
+    @staticmethod
     def update_info_WAGES(employee_shift_dict: dict, sheetLink) -> None:
         """
         Обновляет информацию о сменах сотрудников в таблице заработной платы.
@@ -82,7 +82,7 @@ class Updater:
             # Batch update the sheet with the new values
         if updates:
             sheetLink.batch_update(updates)
-
+    @staticmethod
     def update_info_everyday(days_in_month: int, employee_shiftsList: list, sheetLink) -> None:
         """
         Обновляет информацию о сменах сотрудников в таблице заработной платы за каждый день месяца.
@@ -133,7 +133,7 @@ class Updater:
         # Batch update the sheet with the new values
         if updates:
             sheetLink.batch_update(updates)
-
+    @staticmethod
     def update_info_everyday_TRADEPLACES(days_in_month: int, employee_shiftsList: list, sheetLink) -> None:
         """
         Обновляет информацию о сменах сотрудников по торговым точкам (аренам) 
@@ -186,7 +186,7 @@ class Updater:
         # Batch update the sheet with the new values
         if updates:
             sheetLink.batch_update(updates)
-
+    @staticmethod
     def update_table_from_lists(sheetLink, *lists) -> None:
         """
         Updates table data for columns with INCOME from TRADEPLACES based on provided lists.

@@ -22,6 +22,8 @@ class Parser:
         parseDataNamesShift(*datasets: tuple) -> list:
             Parses employee shifts from multiple datasets.
     """
+    
+    @staticmethod
     def parseDataAboutShifts(pattern: int, *sheets) -> tuple | None:
         """data for different time\nsheets: KOM | PIK | JUNE | LONDONMALL"""
         sheetKOM, sheetPIK, sheetJUNE, sheetLM = sheets
@@ -46,7 +48,8 @@ class Parser:
             return data31KOMENDA, data31PIK, data31LM, data31JUNE
 
         return None
-
+    
+    @staticmethod
     def parseInfoAboutIncome(client, spreadsheet_id: str, sheet_name: str) -> list:
         """
         Находит ячейки, содержащие числовые (финансовые) значения в Google Sheets, и возвращает список кортежей (row_index, cell_value).
@@ -129,7 +132,8 @@ class Parser:
         print(f"Total income NP: {total_income_NP}")
 
         return cells_with_money_type, total_income_NP  
-
+    
+    @staticmethod
     def parseINCOMEfromSHEETS(client: object, month: str, *sheet_ids: tuple) -> tuple[list, list, list, list]:
         """
         Извлекает данные о доходах из переданных листов.
@@ -155,8 +159,9 @@ class Parser:
         print("INFORMATION ABOUT income IN LM")
         list_with_income_LM, LM_NP = Parser.parseInfoAboutIncome(
             client, sheetLM, month)
-        return list_with_income_KOM, KOM_NP, list_with_income_PIK, PIK_NP, list_with_income_JUNE, JUNE_NP, list_with_income_LM, LM_NP
-
+        return list_with_income_KOM, KOM_NP, list_with_income_PIK, PIK_NP, list_with_income_JUNE, JUNE_NP, list_with_income_LM, LM_NP  
+     
+    @staticmethod
     def parseDataNamesShift(*datasets: tuple) -> list:
         """
         Parses employee shifts from multiple datasets.

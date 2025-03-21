@@ -1,6 +1,6 @@
 
-class WebPresenter:
-    """A class used to represent a Web Presenter that handles data processing and updates for various sheets.
+class WebController:
+    """A class used to represent a Web Controller that handles data processing and updates for various sheets.
 
     Attributes:
         view: The view component to interact with the user interface.

@@ -24,15 +24,20 @@ class ResChooser:
 
     def __init__(self, parent=None):
         """Создает окно выбора разрешения."""
-        self.main_window_res = "1680x850"  # Значение по умолчанию
-        self.RESOLUTIONS = {"small | маленькое": "1450x720",
-                            "medium | среднее": "1560x900",
-                              "big | большое": "1680x850"}
-
+        
         self.root = tk.Toplevel(parent) if parent else tk.Tk()
         self.root.resizable(0, 0)
         self.root.title("Resolution Choice")
         self.root.attributes('-topmost', 1)
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+        self.RESOLUTIONS = {
+            "small | маленькое": f"{int(screen_width * 0.65)}x{int(screen_height * 0.65)}",
+            "medium | среднее": f"{int(screen_width * 0.75)}x{int(screen_height * 0.75)}",
+            "big | большое": f"{int(screen_width * 0.85)}x{int(screen_height * 0.85)}"
+        }
+        self.main_window_res = self.RESOLUTIONS["medium | среднее"]  # Значение по умолчанию
+
 
         screen_width = self.root.winfo_screenwidth()
         screen_height = self.root.winfo_screenheight()

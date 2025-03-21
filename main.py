@@ -5,6 +5,7 @@ import sys
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from googleapiclient.discovery import build
+import logging
 
 
 # Model
@@ -12,10 +13,10 @@ from Model.Updater import Updater
 from Model.Parser import Parser
 
 # View
-from View.UI import UiManager
+from View.UiManager import UiManager
 
 # Presenter
-from Presenter.presenter import WebPresenter
+from Controller.Controller import WebController
 
 # addons
 from Addons.ResChooser import ResChooser  # Выбор размер окна
@@ -23,6 +24,18 @@ from Addons.EMP_Creator import EMP_list_creator  # Создание списка
 from Addons.OptimizedWindows import OptimizedWindows  # Оптимизация под масштаб в винде(для ноутов)
 from Addons.VARIABLES_WC import Variables_WC  # Модуль с информационными переменными
 from Addons.QOL import QOL  # Модуль с методами для упрощения жизни
+
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.FileHandler("application.log"),
+        logging.StreamHandler()
+    ]
+)
+
+logger = logging.getLogger(__name__)
 
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -120,7 +133,7 @@ if __name__ == "__main__":
     ui = UiManager(config, scale_factor)
     config['view'] = ui
 
-    presenter = WebPresenter(config)
+    controller = WebController(config)
 
-    ui.presenter = presenter
+    ui.controller = controller
     ui.run()

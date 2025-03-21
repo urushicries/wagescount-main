@@ -1,4 +1,4 @@
-# ui_manager.py
+
 import tkinter as tk
 from tkinter import BooleanVar
 
@@ -46,7 +46,7 @@ class UiManager:
         self.t_income_from_shops_var2 = BooleanVar()
         self.t_set_up_shifts_for_all_days_var3 = BooleanVar()
 
-        self.presenter = None
+        self.conrtoller = None
 
         self.setup_ui()
 
@@ -87,33 +87,33 @@ class UiManager:
             'income': self.t_income_from_shops_var2.get(),
             'shifts': self.t_set_up_shifts_for_all_days_var3.get()
         }
-        if self.presenter:
-            self.presenter.send_request(month, checkboxes, self.days_in_month)
+        if self.controller:
+            self.controller.send_request(month, checkboxes, self.days_in_month)
         else:
-            print("Presenter is not set!")
-            print(self.presenter)
+            print("controller is not set!")
+            print(self.controller)
 
     def toggle_days(self):
         if self.t_wages_whole_month_var1.get() or self.t_set_up_shifts_for_all_days_var3.get():
             self.label_error_info.config(text=" ")
         if self.days_in_month == 15:
             self.days_in_month = 31
-            self.presenter.toggle_RP_button(self.days_in_month)
+            self.controller.toggle_RP_button(self.days_in_month)
             self.label_period_info.config(
                 text=f"{self.days_in_month - 15}    -    {self.days_in_month}")
             print("Поменял РП с \"1 до 15\" на \"16 до 31\"")
         else:
             self.days_in_month = 15
-            self.presenter.toggle_RP_button(self.days_in_month)
+            self.controller.toggle_RP_button(self.days_in_month)
             self.label_period_info.config(
                 text=f" {self.days_in_month - 14}    -    {self.days_in_month}")
             print("Поменял РП с \"16 до 31\" на \"1 до 15\" ")
 
     def toggle_Inc_key(self):
-        self.presenter.toggleINCKey()
+        self.controller.toggleINCKey()
     def delete_ranges(self):
-        if self.presenter:
-            self.presenter.sentRdelete()
+        if self.controller:
+            self.controller.sentRdelete()
             self.success()
 
     def setup_ui(self):
