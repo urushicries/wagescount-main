@@ -16,7 +16,7 @@ class EMP_list_creator:
         position_x = (screen_width - 300) // 2
         position_y = (screen_height - 300) // 2
 
-        self.root.geometry(f'350x540+{position_x}+{position_y}')
+        self.root.geometry(f'450x540+{position_x}+{position_y}')
 
         self.root.grid_rowconfigure(0, weight=1)
         self.root.grid_rowconfigure(1, weight=1)
@@ -28,7 +28,7 @@ class EMP_list_creator:
         self.label.grid(row=0, column=0)
 
 
-        self.textbox = tk.Text(self.root,bg='white', fg='black',height=20,width=40 ,font=("Arial", 12, "bold"))
+        self.textbox = tk.Text(self.root,bg='white', fg='black',height=20,width=40 ,font=("Arial", 9, "bold"))
         self.textbox.grid(row=2, column=0)
 
         self.btn_choose = tk.Button(
