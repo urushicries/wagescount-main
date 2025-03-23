@@ -20,11 +20,11 @@ class WebController:
     Methods:
         send_request(month, checkboxes, days_in_month):
             Sends a request to process data for a given month based on selected options.
-        
+
         sentRdelete():
-        
+
         toggle_RP_button(days_in_month):"""
-    
+
     def __init__(self, config):
         self.view = config['view']
         self.client = config['client']
@@ -39,7 +39,6 @@ class WebController:
         self.shtJUN_id = config['shtJUN_id']
         self.shtLM_id = config['shtLM_id']
         self.days_in_month = 31
-
 
     def send_request(self, month, checkboxes, days_in_month):
         """Sends a request to process data for a given month based on selected options.
@@ -73,7 +72,7 @@ class WebController:
         if not (checkboxes.get('wages') or checkboxes.get('income') or checkboxes.get('shifts')):
             self.view.nothing_picked()
             return
-        
+
         months_data = {
             "January ❄️": {"sheet_suffix": "Январь25", "days": days_in_month},
             "February 🌨️": {"sheet_suffix": "Февраль25", "days": days_in_month},
@@ -87,8 +86,8 @@ class WebController:
             "October 🍁": {"sheet_suffix": "Октябрь25", "days": days_in_month},
             "November 🍂": {"sheet_suffix": "Ноябрь25", "days": days_in_month},
             "December ☃️": {"sheet_suffix": "Декабрь25", "days": days_in_month}
-            }
-        
+        }
+
         print(month, self.infoVariables.current_language)
         month_data = months_data.get(month)
         print(month_data)
@@ -125,7 +124,8 @@ class WebController:
                     self.client, month_data["sheet_suffix"],
                     self.shtKOM_id, self.shtPIK_id, self.shtJUN_id, self.shtLM_id
                 )
-            print("Income data:", incomeKOM, NPKOM, incomePIK, NPPIK, incomeJUNE, NPJUN, incomeLM, NPLM)
+            print("Income data:", incomeKOM, NPKOM, incomePIK,
+                  NPPIK, incomeJUNE, NPJUN, incomeLM, NPLM)
 
             if checkboxes.get('wages'):
                 if dictEMPSHIFT and emp_shiftLST:
@@ -174,6 +174,6 @@ class WebController:
             days_in_month (int): The number of days in the current month.
         """
         self.QOL.toggle_cell_value(self.sheetWAGES, days_in_month)
-        
+
     def toggleINCKey(self):
         self.QOL.toggle_incKEY(self.sheetWAGES)

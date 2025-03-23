@@ -1,0 +1,35 @@
+2025-03-23 15:29:36,900 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-03-23 15:29:56,163 - INFO - Attempting refresh to obtain initial access_token
+2025-03-23 15:29:56,198 - INFO - Refreshing access_token
+2025-03-23 17:32:42,937 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-03-23 17:32:52,953 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-03-23 17:33:08,004 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-03-23 17:33:08,880 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-03-23 17:33:12,681 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-03-23 17:33:13,693 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-03-23 17:39:59,868 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-03-23 17:41:38,426 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-03-23 17:42:15,362 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-03-23 17:42:22,186 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-03-23 17:42:35,237 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-03-23 17:42:35,313 - ERROR - Authentication failed: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'}). Please check your service account key file and permissions.
+2025-03-23 17:43:09,011 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-03-23 17:43:09,091 - ERROR - Authentication failed: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'}). This may be due to an invalid JWT signature. Please ensure the service account key file is valid and has the correct permissions. Steps to resolve:
+1. Verify the key file at /Users/danyaonoprichuk/Documents/repository of lab /wagescount-main/key.json.
+2. Ensure the key file matches the service account in your Google Cloud project.
+3. Check that the service account has access to the spreadsheet and the required APIs are enabled.
+4. Regenerate the key file if necessary from the Google Cloud Console.
+2025-03-23 17:43:27,264 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-03-23 17:43:27,344 - ERROR - Authentication failed: ('invalid_grant: Invalid JWT Signature.', {'error': 'invalid_grant', 'error_description': 'Invalid JWT Signature.'}). This may be due to an invalid JWT signature. Please ensure the service account key file is valid and has the correct permissions. Steps to resolve:
+1. Verify the key file at /Users/danyaonoprichuk/Documents/repository of lab /wagescount-main/key.json.
+2. Ensure the key file matches the service account in your Google Cloud project.
+3. Check that the service account has access to the spreadsheet and the required APIs are enabled.
+4. Regenerate the key file if necessary from the Google Cloud Console.
+2025-03-23 17:45:45,633 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-03-23 17:45:57,543 - INFO - Attempting refresh to obtain initial access_token
+2025-03-23 17:45:57,578 - INFO - Refreshing access_token
+2025-03-23 17:46:46,232 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-03-23 17:52:50,456 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-03-23 17:54:35,549 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-03-23 17:54:41,838 - INFO - Processing sheet for March 🌸 with suffix: Март25 and days: 15
+2025-03-23 17:54:42,220 - ERROR - Error occurred while processing sheets for March 🌸: the header row in the worksheet is not unique, try passing 'expected_headers' to get_all_records
